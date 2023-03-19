@@ -2,17 +2,17 @@ package beepod.modelo;
 
 import java.util.ArrayList;
 
-public class ListaClientes extends Lista<Cliente>{
+public class ListaClientesNormal extends Lista<ClienteNormal>{
     /**
      * constructor
      * @param lista
      */
-    public ListaClientes(ArrayList<Cliente> lista) {
+    public ListaClientesNormal(ArrayList<ClienteNormal> lista) {
         super(lista);
     }
 
     @Override
     public String toString() {
-        return "ListaClientes{} " + super.toString();
+        return "ListaClientesNormal{} " + super.toString();
     }
 }

@@ -8,15 +8,23 @@ import java.util.ArrayList;
 public class Controlador {
     private Datos datos;
     private ArrayList<Articulo> ListaArticulos;
-    private ArrayList<Cliente> ListaClientes;
+    private ArrayList<ClienteNormal> ListaClientesNormal;
+    private ArrayList<ClientePremium> ListaClientesPremium;
+
+
     private ArrayList<Pedido> ListaPedidos;
 
+
+    protected ListaClientesNormal clientesNormal = new ListaClientesNormal(ListaClientesNormal);
+
+    protected ListaClientesPremium clientesPremium = new ListaClientesPremium(ListaClientesPremium);
+
     protected ListaArticulos articulos = new ListaArticulos(ListaArticulos);
-    protected ListaClientes clientes = new ListaClientes(ListaClientes);
     protected ListaPedidos pedidos = new ListaPedidos(ListaPedidos);
 
+
     public Controlador() {
-        datos = new Datos(clientes,articulos,pedidos);
+        datos = new Datos(clientesNormal,clientesPremium,articulos,pedidos);
     }
 
 
