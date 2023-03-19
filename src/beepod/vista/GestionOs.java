@@ -25,10 +25,16 @@ public class GestionOs {
             opcio = pedirOpcion();
             switch (opcio){
                 case '1':
+                    GestionArticulos gestionArticulos = new GestionArticulos();
+                    gestionArticulos.inicio();
                     break;
                 case '2':
+                    GestionClientes gestionClientes = new GestionClientes();
+                    gestionClientes.inicio();
                     break;
                 case '3':
+                    GestionPedidos gestionPedidos = new GestionPedidos();
+                    gestionPedidos.inicio();
                     break;
                 case '0':
                     salir = true;
