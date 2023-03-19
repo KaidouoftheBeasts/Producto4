@@ -21,7 +21,7 @@ public class GestionOs {
             System.out.println("1. Gestión Articulos");
             System.out.println("2. Gestión Clientes");
             System.out.println("3. Gestión Pedidos");
-            System.out.println("0. Salir22");
+            System.out.println("0. Salir");
             opcio = pedirOpcion();
             switch (opcio){
                 case '1':
