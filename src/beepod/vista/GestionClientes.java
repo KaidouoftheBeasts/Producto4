@@ -4,6 +4,9 @@ import beepod.controlador.Controlador;
 
 import java.util.Scanner;
 
+/**
+ * Clase para la gestión de los clientes
+ */
 public class GestionClientes {
     private Controlador control = new Controlador();
 

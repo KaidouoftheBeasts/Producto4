@@ -4,6 +4,9 @@ import beepod.controlador.Controlador;
 
 import java.util.Scanner;
 
+/**
+ * Clase para la gestión de los Articulos
+ */
 public class GestionArticulos {
 
     Scanner teclado = new Scanner(System.in);
