@@ -30,7 +30,7 @@ public class Lista <T> {
      * Metodo agregar elementos a la lista
      * @param t
      */
-    public void addElemeto(T t){
+    public void addElemento(T t){
         lista.add(t);
     }
 

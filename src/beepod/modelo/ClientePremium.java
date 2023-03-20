@@ -36,9 +36,6 @@ toString
  */
     @Override
     public String toString() {
-        return "Premiun{" +
-                "cuota=" + cuota +
-                ", descuento=" + descuento +
-                "} " + super.toString();
+        return  super.toString()+" cuota: "+cuota+ " descuento"+descuento;
     }
 }

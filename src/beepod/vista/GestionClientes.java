@@ -1,8 +1,11 @@
 package beepod.vista;
 
+import beepod.controlador.Controlador;
+
 import java.util.Scanner;
 
 public class GestionClientes {
+    private Controlador control = new Controlador();
 
     Scanner teclado = new Scanner(System.in);
    public GestionClientes(){
@@ -23,15 +26,20 @@ public class GestionClientes {
             opcio = pedirOpcion();
             switch (opcio){
                 case '1':
+                    control.crearClientes();
                     break;
                 case '2':
                     break;
                 case '3':
+                    control.listarClientesNormal();
                     break;
                 case '4':
                     break;
                 case '0':
                     salir = true;
+                    break;
+                default:
+                    System.out.println("Opción incorrecta!!");
 
             }
 

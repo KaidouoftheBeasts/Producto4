@@ -32,6 +32,9 @@ public class GestionPedidos {
                     break;
                 case '0':
                     salir = true;
+                    break;
+                default:
+                    System.out.println("Opción incorrecta!!");
 
             }
 
