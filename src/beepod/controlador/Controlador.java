@@ -44,9 +44,7 @@ public class Controlador {
         int opcion = s.nextInt();
         if (opcion == 1){
             clienteNormal = new ClienteNormal(nombre, domicilio, nif, email);
-            datos.setListaClientesNormal(clientesNormal);
-            //listaClientesNormal.add(clienteNormal);
-
+            listaClientesNormal.add(clienteNormal);
             System.out.println("Cliente Standar añadido "+ clienteNormal);
         }else{
             s.nextLine();
@@ -55,17 +53,26 @@ public class Controlador {
             System.out.println("Introduce el descuento: ");
             float descuento = s.nextFloat();
             clientePremium = new ClientePremium(nombre,domicilio,nif, email, cuota, descuento);
-            datos.setListaClientesPremiun(clientesPremium);
-            //listaClientesPremium.add(clientePremium);
+            listaClientesPremium.add(clientePremium);
             System.out.println("Cliente premiun añadido "+ clientePremium);
         }
         s.nextLine();
+    }
+    public void listarTodosClientes(){
+        listarClientesNormal();
+        listarClientesPremium();
     }
     public void listarClientesNormal(){
         for (ClienteNormal clienteNormal: listaClientesNormal){//ver para usar datos.
             System.out.println(clienteNormal);
         }
     }
+    public void listarClientesPremium(){
+        for (ClientePremium clientePremium: listaClientesPremium){//ver para usar datos.
+            System.out.println(clientePremium);
+        }
+    }
+
 
 
 }

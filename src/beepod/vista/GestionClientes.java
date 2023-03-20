@@ -29,11 +29,13 @@ public class GestionClientes {
                     control.crearClientes();
                     break;
                 case '2':
+                    control.listarTodosClientes();
                     break;
                 case '3':
                     control.listarClientesNormal();
                     break;
                 case '4':
+                    control.listarClientesPremium();
                     break;
                 case '0':
                     salir = true;

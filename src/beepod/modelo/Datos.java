@@ -3,7 +3,6 @@ package beepod.modelo;
 public class Datos {
     private ListaClientesNormal listaClientesNormal;
     private ListaClientesPremium listaClientesPremiun;
-
     private ListaArticulos listaArticulos;
     private ListaPedidos listaPedidos;
 

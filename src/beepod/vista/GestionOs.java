@@ -1,15 +1,15 @@
 package beepod.vista;
 
-import beepod.controlador.Controlador;
 
 import java.util.Scanner;
 
+/**
+ * Vista del menú principal
+ */
 public class GestionOs {
-    private Controlador controlador;
+
     Scanner teclado = new Scanner(System.in);
-   public GestionOs(){
-        controlador = new Controlador();
-    }
+
 
     public void inicio(){
         boolean salir = false;
