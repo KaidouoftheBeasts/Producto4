@@ -46,9 +46,7 @@ public class Datos {
     }
 
 
-    public ListaArticulos getListaArticulos() {
-        return listaArticulos;
-    }
+    public ListaArticulos getListaArticulos() { return listaArticulos; }
 
     public void setListaArticulos(ListaArticulos listaArticulos) {
         this.listaArticulos = listaArticulos;
