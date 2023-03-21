@@ -11,13 +11,14 @@ public class Controlador {
     private Datos datos;
     private ClienteNormal clienteNormal = new ClienteNormal();
     private ClientePremium clientePremium = new ClientePremium();
-    private ArrayList<Articulo> listaArticulos;
+    private ArrayList<Articulo> listaArticulos = new ArrayList<>();
     private ArrayList<ClienteNormal> listaClientesNormal = new ArrayList<>();
     private ArrayList<ClientePremium> listaClientesPremium = new ArrayList<>();
 
+    private Articulo articulo;
+
 
     private ArrayList<Pedido> ListaPedidos;
-
 
     protected ListaClientesNormal clientesNormal = new ListaClientesNormal(listaClientesNormal);
 
@@ -28,7 +29,7 @@ public class Controlador {
 
 
     public Controlador() {
-        datos = new Datos(clientesNormal,clientesPremium,articulos,pedidos);
+        datos = new Datos(clientesNormal,clientesPremium,articulos,pedidos, articulo);
     }
 
     public void crearClientes(){
@@ -72,7 +73,25 @@ public class Controlador {
             System.out.println(clientePremium);
         }
     }
-
-
-
+    public void crearArticulo(){
+        System.out.println("Introduce el codigo: ");
+        String codigo = s.nextLine();
+        System.out.println("Introduce la descripcion: ");
+        String descripcion = s.nextLine();
+        System.out.println("Introduce el precio de venta: ");
+        float precioVenta = s.nextFloat();
+        System.out.println("Introduce los gastos de envio: ");
+        float gastosEnvio = s.nextFloat();
+        System.out.println("Introduce el tiempo de preparación");
+        long tiempo = s.nextLong();
+        articulo = new Articulo(codigo, descripcion, precioVenta, gastosEnvio, tiempo);
+        listaArticulos.add(articulo);
+        s.nextLine();
+        System.out.println("Articulo creado!!"+articulo);
+    }
+    public void listarArticulos(){
+        for (Articulo articulo : listaArticulos){//ver para usar datos.
+            System.out.println(articulo);
+        }
+    }
 }
