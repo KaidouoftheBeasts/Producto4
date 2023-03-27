@@ -71,11 +71,27 @@ public class Controlador {
         }
         return resp.charAt(0);
     }
+
+    /**
+     * Metodo para crear tipo de cliente Standar
+     * @param nombre
+     * @param domicilio
+     * @param nif
+     * @param email
+     */
     public void crearClienteStandar(String nombre, String domicilio, String nif, String email){
         clienteNormal = new ClienteNormal(nombre, domicilio, nif, email);
         datos.getListaClientesNormal().addElemento(clienteNormal);
         System.out.println("Añadido "+ clienteNormal);
     }
+
+    /**
+     * Metodo para crear tipo de cliente Premium contemplando Excepción del tipo de dato descuento.
+     * @param nombre
+     * @param domicilio
+     * @param nif
+     * @param email
+     */
     public void crearClientePremium(String nombre, String domicilio, String nif, String email){
         try{
             System.out.println("La cuota anual para este cliente son 30€");
