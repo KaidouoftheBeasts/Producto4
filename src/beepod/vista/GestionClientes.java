@@ -32,13 +32,19 @@ public class GestionClientes {
                     control.crearClientes();
                     break;
                 case '2':
+                    System.out.println("----------------------------------------Lista de todos los Clientes------------------------------------\n");
                     control.listarTodosClientes();
+                    System.out.println("-------------------------------------------------------------------------------------------------------\n");
                     break;
                 case '3':
+                    System.out.println("------------------------------------------Lista los clientes Standar------------------------------------\n");
                     control.listarClientesNormal();
+                    System.out.println("--------------------------------------------------------------------------------------------------------\n");
                     break;
                 case '4':
+                    System.out.println("-------------------------------------------Lista los clientes Premium-----------------------------------\n");
                     control.listarClientesPremium();
+                    System.out.println("---------------------------------------------------------------------------------------------------------\n");
                     break;
                 case '0':
                     salir = true;

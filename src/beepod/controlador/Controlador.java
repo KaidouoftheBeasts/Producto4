@@ -94,17 +94,14 @@ public class Controlador {
         boolean entradaValida = false;
         while (!entradaValida) {
             try {
-
                 System.out.println("Introduce el descuento: ");
                 float descuento = Float.parseFloat(s.nextLine());
-                //float descuento = s.nextFloat();
                 clientePremium = new ClientePremium(nombre,domicilio,nif, email, cuota, descuento);
                 datos.getListaClientesPremiun().addElemento(clientePremium);
                 System.out.println("Añadido "+ clientePremium);
-                //s.nextLine();
                 entradaValida = true;
             } catch (NumberFormatException e) {
-                System.out.println("Error: debe ingresar un número decimal válido.");
+                System.out.println("Error: debe ingresar un tipo de dato válido!!!");
             }
         }
     }
@@ -114,16 +111,20 @@ public class Controlador {
         listarClientesPremium();
     }
     public void listarClientesNormal(){
+        int i = 0;
         for (ClienteNormal clienteNormal: datos.getListaClientesNormal().getLista()){
-            System.out.println(clienteNormal);
+            i++;
+            System.out.println("St "+i+" "+clienteNormal);
         }
     }
     public void listarClientesPremium(){
+        int i = 0;
         for (ClientePremium clientePremium: datos.getListaClientesPremiun().getLista()){
-            System.out.println(clientePremium);
+            i++;
+            System.out.println("Pr "+i+" "+clientePremium);
         }
     }
-    public void crearArticulo(){
+    public void crearArticulo1(){
         System.out.println("Introduce el codigo: ");
         String codigo = s.nextLine();
         System.out.println("Introduce la descripcion: ");
@@ -139,9 +140,54 @@ public class Controlador {
         s.nextLine();
         System.out.println("Articulo creado!!"+articulo);
     }
+
+    public void crearArticulo(){// crear articulo con las excepciones del tipo de datos introducido
+        System.out.println("Introduce el codigo: ");
+        String codigo = s.nextLine();
+        System.out.println("Introduce la descripcion: ");
+        String descripcion = s.nextLine();
+        System.out.println("Introduce el precio de venta: ");
+        float precioVenta = 0;
+        float gastosEnvio = 0;
+        long tiempo = 0;
+        boolean entradaValida = false;
+        while (!entradaValida) {
+            try {
+                precioVenta = Float.parseFloat(s.nextLine());
+                entradaValida = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: debe ingresar un tipo de dato válido en el precio de venta!!!");
+            }
+        }
+        entradaValida = false;
+        System.out.println("Introduce los gastos de envio: ");
+        while (!entradaValida) {
+            try {
+                gastosEnvio = Float.parseFloat(s.nextLine());
+                entradaValida = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: debe ingresar un tipo de dato válido en los gastos de envío!!!");
+            }
+        }
+        entradaValida = false;
+        System.out.println("Introduce el tiempo de preparación");
+        while (!entradaValida) {
+            try {
+                tiempo = Long.parseLong(s.nextLine());
+                entradaValida = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: debe ingresar un tipo de dato válido para el tiempo!!!");
+            }
+        }
+        articulo = new Articulo(codigo, descripcion, precioVenta, gastosEnvio, tiempo);
+        datos.getListaArticulos().addElemento(articulo);
+        System.out.println("Creado !! "+articulo);
+    }
     public void listarArticulos(){
+        int i = 0;
         for (Articulo articulo : datos.getListaArticulos().getLista()){
-            System.out.println(articulo);
+            i++;
+            System.out.println(i+" "+articulo);
         }
     }
 }

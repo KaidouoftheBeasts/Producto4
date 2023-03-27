@@ -30,7 +30,9 @@ public class GestionArticulos {
                     control.crearArticulo();
                     break;
                 case '2':
+                    System.out.println("-----------------------------------------Lista de los articulos---------------------------------------\n");
                     control.listarArticulos();
+                    System.out.println("-------------------------------------------------------------------------------------------------------\n");
                     break;
                 case '0':
                     salir = true;
