@@ -4,8 +4,11 @@ import beepod.controlador.Controlador;
 
 import java.util.Scanner;
 
+/**
+ * Clase para la gestión de los Articulos
+ */
 public class GestionArticulos {
-
+    Controlador control = new Controlador();
     Scanner teclado = new Scanner(System.in);
    public GestionArticulos(){
 
@@ -24,8 +27,10 @@ public class GestionArticulos {
             opcio = pedirOpcion();
             switch (opcio){
                 case '1':
+                    control.crearArticulo();
                     break;
                 case '2':
+                    control.listarArticulos();
                     break;
                 case '0':
                     salir = true;
@@ -40,7 +45,7 @@ public class GestionArticulos {
 
     private char pedirOpcion() {
         String resp;
-        System.out.println("Elige la opcion (1,2 o 0");
+        System.out.println("Elige la opcion (1,2 o 0)");
         resp = teclado.nextLine();
         if (resp.isEmpty()){
             resp = " ";

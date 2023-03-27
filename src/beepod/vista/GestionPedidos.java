@@ -2,6 +2,9 @@ package beepod.vista;
 
 import java.util.Scanner;
 
+/**
+ * Clase para la gestión de los pedidos
+ */
 public class GestionPedidos {
 
     Scanner teclado = new Scanner(System.in);
