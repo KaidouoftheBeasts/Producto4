@@ -13,6 +13,6 @@ public class ClienteNormal extends Cliente{
 * */
     @Override
     public String toString() {
-        return super.toString();
+        return "Cliente Standar: "+ super.toString();
     }
 }

@@ -2,6 +2,9 @@ package beepod.controlador;
 
 
 import beepod.modelo.*;
+import beepod.vista.GestionArticulos;
+import beepod.vista.GestionClientes;
+import beepod.vista.GestionPedidos;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -39,37 +42,68 @@ public class Controlador {
         String nif = s.nextLine();
         System.out.println("Introduce el email: ");
         String email = s.nextLine();
-        System.out.println("Introduce el tipo de cliente: '1' para cliente Normal o '2' para Premium");
-        int opcion = s.nextInt();
-        if (opcion == 1){
-            clienteNormal = new ClienteNormal(nombre, domicilio, nif, email);
-            datos.getListaClientesNormal().addElemento(clienteNormal);
-            //listaClientesNormal.add(clienteNormal);
-            System.out.println("Cliente Standar añadido "+ clienteNormal);
-        }else{
-            s.nextLine();
-            System.out.println("Introduce el importe de la cuota: ");
-            float cuota = s.nextFloat();
+        boolean salir = false;
+        char opcio;
+        do{
+            System.out.println("Tipos disponibbles de Cliente: '1' para cliente Standar o '2' para Premium");
+            opcio = pedirOpcion();
+
+            switch (opcio){
+                case '1' :
+                    crearClienteStandar(nombre, domicilio, nif, email);
+                    salir = true;
+                    break;
+                case '2' :
+                    crearClientePremium(nombre, domicilio, nif, email);
+                    salir = true;
+                    break;
+                default:
+                    System.out.println("Opción incorrecta!!");
+            }
+        }while (!salir);
+    }
+    private char pedirOpcion() {
+        String resp;
+        System.out.println("Elige la opcion ");
+        resp = s.nextLine();
+        if (resp.isEmpty()){
+            resp = " ";
+        }
+        return resp.charAt(0);
+    }
+    public void crearClienteStandar(String nombre, String domicilio, String nif, String email){
+        clienteNormal = new ClienteNormal(nombre, domicilio, nif, email);
+        datos.getListaClientesNormal().addElemento(clienteNormal);
+        System.out.println("Añadido "+ clienteNormal);
+    }
+    public void crearClientePremium(String nombre, String domicilio, String nif, String email){
+        try{
+            System.out.println("La cuota anual para este cliente son 30€");
+            float cuota = 30;// valor fijo para este cliente
             System.out.println("Introduce el descuento: ");
             float descuento = s.nextFloat();
             clientePremium = new ClientePremium(nombre,domicilio,nif, email, cuota, descuento);
             datos.getListaClientesPremiun().addElemento(clientePremium);
-           // listaClientesPremium.add(clientePremium);
-            System.out.println("Cliente premiun añadido "+ clientePremium);
+            System.out.println("Añadido "+ clientePremium);
+            s.nextLine();
+        }catch (Exception e){//excepción para que el tipo de dato sea float
+            System.out.println("Error en la introducción del descuento!!\nIntroduce un valor numérico\nCrea de nuevo el cliente!");
+            s.nextLine();
+            crearClientes();
         }
-        s.nextLine();
     }
+
     public void listarTodosClientes(){
         listarClientesNormal();
         listarClientesPremium();
     }
     public void listarClientesNormal(){
-        for (ClienteNormal clienteNormal: datos.getListaClientesNormal().getLista()){//ver para usar datos.
+        for (ClienteNormal clienteNormal: datos.getListaClientesNormal().getLista()){
             System.out.println(clienteNormal);
         }
     }
     public void listarClientesPremium(){
-        for (ClientePremium clientePremium: datos.getListaClientesPremiun().getLista()){//ver para usar datos.
+        for (ClientePremium clientePremium: datos.getListaClientesPremiun().getLista()){
             System.out.println(clientePremium);
         }
     }
@@ -90,7 +124,7 @@ public class Controlador {
         System.out.println("Articulo creado!!"+articulo);
     }
     public void listarArticulos(){
-        for (Articulo articulo : datos.getListaArticulos().getLista()){//ver para usar datos.
+        for (Articulo articulo : datos.getListaArticulos().getLista()){
             System.out.println(articulo);
         }
     }

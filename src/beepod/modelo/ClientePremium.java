@@ -36,6 +36,6 @@ toString
  */
     @Override
     public String toString() {
-        return  super.toString()+" cuota: "+cuota+ " descuento"+descuento;
+        return  "Cliente Premium: "+super.toString()+" cuota: "+cuota+" €uros" +" descuento"+descuento+ " %";
     }
 }
