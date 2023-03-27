@@ -20,9 +20,7 @@ public class Controlador {
 
 
     protected ListaClientesNormal clientesNormal = new ListaClientesNormal(listaClientesNormal);
-
     protected ListaClientesPremium clientesPremium = new ListaClientesPremium(listaClientesPremium);
-
     protected ListaArticulos articulos = new ListaArticulos(listaArticulos);
     protected ListaPedidos pedidos = new ListaPedidos(ListaPedidos);
 
