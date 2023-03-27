@@ -3,6 +3,11 @@ package beepod.modelo;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Clase genérica
+ * @param <T>
+ */
+
 public class Lista <T> {
     Scanner input = new Scanner(System.in);
     protected ArrayList<T> lista;

@@ -11,13 +11,14 @@ public class Controlador {
     private Datos datos;
     private ClienteNormal clienteNormal = new ClienteNormal();
     private ClientePremium clientePremium = new ClientePremium();
-    private ArrayList<Articulo> listaArticulos;
+    private ArrayList<Articulo> listaArticulos = new ArrayList<>();
     private ArrayList<ClienteNormal> listaClientesNormal = new ArrayList<>();
     private ArrayList<ClientePremium> listaClientesPremium = new ArrayList<>();
 
+    private Articulo articulo;
+
 
     private ArrayList<Pedido> ListaPedidos;
-
 
     protected ListaClientesNormal clientesNormal = new ListaClientesNormal(listaClientesNormal);
     protected ListaClientesPremium clientesPremium = new ListaClientesPremium(listaClientesPremium);
@@ -26,7 +27,7 @@ public class Controlador {
 
 
     public Controlador() {
-        datos = new Datos(clientesNormal,clientesPremium,articulos,pedidos);
+        datos = new Datos(clientesNormal,clientesPremium,articulos,pedidos, articulo);
     }
 
     public void crearClientes(){
@@ -42,9 +43,8 @@ public class Controlador {
         int opcion = s.nextInt();
         if (opcion == 1){
             clienteNormal = new ClienteNormal(nombre, domicilio, nif, email);
-            datos.setListaClientesNormal(clientesNormal);
+            datos.getListaClientesNormal().addElemento(clienteNormal);
             //listaClientesNormal.add(clienteNormal);
-
             System.out.println("Cliente Standar añadido "+ clienteNormal);
         }else{
             s.nextLine();
@@ -53,17 +53,45 @@ public class Controlador {
             System.out.println("Introduce el descuento: ");
             float descuento = s.nextFloat();
             clientePremium = new ClientePremium(nombre,domicilio,nif, email, cuota, descuento);
-            datos.setListaClientesPremiun(clientesPremium);
-            //listaClientesPremium.add(clientePremium);
+            datos.getListaClientesPremiun().addElemento(clientePremium);
+           // listaClientesPremium.add(clientePremium);
             System.out.println("Cliente premiun añadido "+ clientePremium);
         }
         s.nextLine();
     }
+    public void listarTodosClientes(){
+        listarClientesNormal();
+        listarClientesPremium();
+    }
     public void listarClientesNormal(){
-        for (ClienteNormal clienteNormal: listaClientesNormal){//ver para usar datos.
+        for (ClienteNormal clienteNormal: datos.getListaClientesNormal().getLista()){//ver para usar datos.
             System.out.println(clienteNormal);
         }
     }
-
-
+    public void listarClientesPremium(){
+        for (ClientePremium clientePremium: datos.getListaClientesPremiun().getLista()){//ver para usar datos.
+            System.out.println(clientePremium);
+        }
+    }
+    public void crearArticulo(){
+        System.out.println("Introduce el codigo: ");
+        String codigo = s.nextLine();
+        System.out.println("Introduce la descripcion: ");
+        String descripcion = s.nextLine();
+        System.out.println("Introduce el precio de venta: ");
+        float precioVenta = s.nextFloat();
+        System.out.println("Introduce los gastos de envio: ");
+        float gastosEnvio = s.nextFloat();
+        System.out.println("Introduce el tiempo de preparación");
+        long tiempo = s.nextLong();
+        articulo = new Articulo(codigo, descripcion, precioVenta, gastosEnvio, tiempo);
+        datos.getListaArticulos().addElemento(articulo);// de las dos maneras se añaden
+        s.nextLine();
+        System.out.println("Articulo creado!!"+articulo);
+    }
+    public void listarArticulos(){
+        for (Articulo articulo : datos.getListaArticulos().getLista()){//ver para usar datos.
+            System.out.println(articulo);
+        }
+    }
 }
