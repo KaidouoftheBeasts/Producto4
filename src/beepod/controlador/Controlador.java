@@ -2,10 +2,6 @@ package beepod.controlador;
 
 
 import beepod.modelo.*;
-import beepod.vista.GestionArticulos;
-import beepod.vista.GestionClientes;
-import beepod.vista.GestionPedidos;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -93,19 +89,23 @@ public class Controlador {
      * @param email
      */
     public void crearClientePremium(String nombre, String domicilio, String nif, String email){
-        try{
-            System.out.println("La cuota anual para este cliente son 30€");
-            float cuota = 30;// valor fijo para este cliente
-            System.out.println("Introduce el descuento: ");
-            float descuento = s.nextFloat();
-            clientePremium = new ClientePremium(nombre,domicilio,nif, email, cuota, descuento);
-            datos.getListaClientesPremiun().addElemento(clientePremium);
-            System.out.println("Añadido "+ clientePremium);
-            s.nextLine();
-        }catch (Exception e){//excepción para que el tipo de dato sea float
-            System.out.println("Error en la introducción del descuento!!\nIntroduce un valor numérico\nCrea de nuevo el cliente!");
-            s.nextLine();
-            crearClientes();
+        System.out.println("La cuota anual para este cliente son 30€");
+        float cuota = 30;// valor fijo para este cliente
+        boolean entradaValida = false;
+        while (!entradaValida) {
+            try {
+
+                System.out.println("Introduce el descuento: ");
+                float descuento = Float.parseFloat(s.nextLine());
+                //float descuento = s.nextFloat();
+                clientePremium = new ClientePremium(nombre,domicilio,nif, email, cuota, descuento);
+                datos.getListaClientesPremiun().addElemento(clientePremium);
+                System.out.println("Añadido "+ clientePremium);
+                //s.nextLine();
+                entradaValida = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: debe ingresar un número decimal válido.");
+            }
         }
     }
 
