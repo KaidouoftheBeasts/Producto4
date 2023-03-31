@@ -8,10 +8,10 @@ public class ClientePremium extends Cliente {
     public ClientePremium(){
 
     }
-    public ClientePremium(String nombre, String domicilio, String nif, String email, float cuota, float descuento) {
+    public ClientePremium(String nombre, String domicilio, String nif, String email) {
         super(nombre, domicilio, nif, email);
-        this.cuota = cuota;
-        this.descuento = descuento;
+        cuota = 30;
+        descuento = (float) 0.2;
     }
 /*
 * Setters y getters
@@ -30,6 +30,21 @@ public class ClientePremium extends Cliente {
 
     public void setDescuento(float descuento) {
         this.descuento = descuento;
+    }
+
+    @Override
+    public String tipoCliente() {
+        return "Premium";
+    }
+
+    @Override
+    public float calcAnual() {
+        return 30.0f;
+    }
+
+    @Override
+    public float descuentoEnv() {
+        return 0.2f;
     }
 /*
 toString

@@ -8,7 +8,7 @@ public class ListaClientesPremium extends Lista<ClientePremium>{
      * @param lista
      */
     public ListaClientesPremium(ArrayList<ClientePremium> lista) {
-        super(lista);
+        super();
     }
 
     @Override
