@@ -29,7 +29,7 @@ public class GestionPedidos {
             opcio = pedirOpcion();
             switch (opcio){
                 case '1':
-                    datosPedido(control);
+                    //datosPedido(control);
                     break;
                 case '2':
                     break;
@@ -58,10 +58,10 @@ public class GestionPedidos {
         return resp.charAt(0);
     }
 
-    public void datosPedido(Controlador control) {
+    /*public void datosPedido(Controlador control) {
         // Pedir el correo electrónico del cliente
         System.out.println("Introduce el correo electrónico del cliente:");
         String email = teclado.nextLine();
         control.crearPedido(email);
-    }
+    }*/
 }

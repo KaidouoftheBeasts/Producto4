@@ -55,7 +55,7 @@ public class Controlador {
         }
     }
 
-    public void crearPedido(String email) {
+    /*public void crearPedido(String email) {
         Cliente cliente = null;
         // Comprobar si el cliente existe
         for (Cliente c : datos.getListaClientes().getLista()) {
@@ -105,5 +105,5 @@ public class Controlador {
 
             System.out.println("Pedido añadido correctamente.");
         }
-    }
+    }*/
 }

@@ -48,7 +48,6 @@ public class GestionClientes {
     }
 
     private char pedirOpcion() {
-        teclado.nextLine();
         String resp;
         System.out.println("Elige la opcion (1,2,3,4 o 0): ");
         resp = teclado.nextLine();
