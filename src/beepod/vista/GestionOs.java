@@ -34,7 +34,7 @@ public class GestionOs {
                     break;
                 case '3':
                     GestionPedidos gestionPedidos = new GestionPedidos();
-                    //gestionPedidos.inicio(control);
+                    gestionPedidos.inicio(control);
                     break;
                 case '0':
                     salir = true;
