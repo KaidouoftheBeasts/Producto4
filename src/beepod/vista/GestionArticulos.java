@@ -44,7 +44,7 @@ public class GestionArticulos {
 
     private char pedirOpcion() {
         String resp;
-        System.out.println("Elige la opcion (1,2 o 0)");
+        System.out.println("Elige la opcion (1,2 o 0): ");
         resp = teclado.nextLine();
         if (resp.isEmpty()){
             resp = " ";

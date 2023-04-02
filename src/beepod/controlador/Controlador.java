@@ -22,11 +22,11 @@ public class Controlador {
         if (opcion == 1){
             ClienteNormal clienteNormal = new ClienteNormal(nombre, domicilio, nif, email);
             datos.getListaClientes().addElemento(clienteNormal);
-            System.out.println("Cliente Standar añadido: "+ clienteNormal);
+            System.out.println("Cliente Standar añadido.\n"+ clienteNormal);
         }else{
             ClientePremium clientePremium = new ClientePremium(nombre,domicilio,nif, email);
             datos.getListaClientes().addElemento(clientePremium);
-            System.out.println("Cliente premiun añadido: "+ clientePremium);
+            System.out.println("Cliente premiun añadido.\n"+ clientePremium);
         }
     }
     // Método para listar todos los clientes
@@ -105,6 +105,7 @@ public class Controlador {
             // Pedir la cantidad del artículo
             System.out.println("Introduce la cantidad: ");
             int cantidad = s.nextInt();
+
             // Obtener el último número de pedido y aumentarlo en 1
             int numPedido = 1;
             if (!datos.getListaPedidos().getArrayList().isEmpty()) {
@@ -119,6 +120,7 @@ public class Controlador {
             datos.getListaPedidos().addElemento(pedido);
 
             System.out.println("Pedido añadido correctamente.");
+            System.out.println(pedido.toString());
         }
     }
 }

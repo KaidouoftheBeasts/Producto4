@@ -76,7 +76,7 @@ public class Articulo {
         return "Articulo{" +
                 "Codigo: '" + codigo + '\'' +
                 ", Descripcion: '" + descripcion + '\'' +
-                ", PVP: " + precioVenta +
+                ", PVP: " + precioVenta + "€" +
                 ", Envio: " + gastosEnvio + "€" +
                 ", Preparacion: " + tiempoPreparacion +
                 '}';
