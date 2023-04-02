@@ -1,14 +1,15 @@
 package beepod.modelo;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Pedido {
     //Atributos
+    private static int ultimoNumPedido = 0;
     private int numPedido;
     private Cliente cliente;
     private Articulo articulo;
     private int cantidad;
-    private Date fecha;
+    private LocalDateTime fecha;
     private boolean enviado;
 /*Constructores
 * */
@@ -16,13 +17,13 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(int numPedido, Cliente cliente, Articulo articulo, int cantidad, Date fecha, boolean enviado) {
-        this.numPedido = numPedido;
+    public Pedido(Cliente cliente, Articulo articulo, int cantidad) {
+        this.numPedido = ++ultimoNumPedido;
         this.cliente = cliente;
         this.articulo = articulo;
         this.cantidad = cantidad;
-        this.fecha = fecha;
-        this.enviado = enviado;
+        this.fecha = LocalDateTime.now();
+        this.enviado = false;
     }
 /*
 * Getters y Setters
@@ -59,11 +60,11 @@ public class Pedido {
         this.cantidad = cantidad;
     }
 
-    public Date getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 

@@ -2,192 +2,122 @@ package beepod.controlador;
 
 
 import beepod.modelo.*;
-import java.util.ArrayList;
+import beepod.vista.GestionClientes;
+
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Controlador {
+    GestionClientes gestionClientes = new GestionClientes();
     Scanner s = new Scanner(System.in);
     private Datos datos;
-    private ClienteNormal clienteNormal = new ClienteNormal();
-    private ClientePremium clientePremium = new ClientePremium();
-    private ArrayList<Articulo> listaArticulos = new ArrayList<>();
-    private ArrayList<ClienteNormal> listaClientesNormal = new ArrayList<>();
-    private ArrayList<ClientePremium> listaClientesPremium = new ArrayList<>();
-
-    private Articulo articulo;
-
-
-    private ArrayList<Pedido> ListaPedidos;
-
-    protected ListaClientesNormal clientesNormal = new ListaClientesNormal(listaClientesNormal);
-    protected ListaClientesPremium clientesPremium = new ListaClientesPremium(listaClientesPremium);
-    protected ListaArticulos articulos = new ListaArticulos(listaArticulos);
-    protected ListaPedidos pedidos = new ListaPedidos(ListaPedidos);
-
 
     public Controlador() {
-        datos = new Datos(clientesNormal,clientesPremium,articulos,pedidos, articulo);
+        datos = new Datos();
     }
 
-    public void crearClientes(){
-        System.out.println("Introduce el nombre: ");
-        String nombre = s.nextLine();
-        System.out.println("Introduce el domicilio: ");
-        String domicilio = s.nextLine();
-        System.out.println("Introduce el nif: ");
-        String nif = s.nextLine();
-        System.out.println("Introduce el email: ");
-        String email = s.nextLine();
-        boolean salir = false;
-        char opcio;
-        do{
-            System.out.println("Tipos disponibbles de Cliente: '1' para cliente Standar o '2' para Premium");
-            opcio = pedirOpcion();
-
-            switch (opcio){
-                case '1' :
-                    crearClienteStandar(nombre, domicilio, nif, email);
-                    salir = true;
-                    break;
-                case '2' :
-                    crearClientePremium(nombre, domicilio, nif, email);
-                    salir = true;
-                    break;
-                default:
-                    System.out.println("Opción incorrecta!!");
-            }
-        }while (!salir);
-    }
-    private char pedirOpcion() {
-        String resp;
-        System.out.println("Elige la opcion ");
-        resp = s.nextLine();
-        if (resp.isEmpty()){
-            resp = " ";
-        }
-        return resp.charAt(0);
-    }
-
-    /**
-     * Metodo para crear tipo de cliente Standar
-     * @param nombre
-     * @param domicilio
-     * @param nif
-     * @param email
-     */
-    public void crearClienteStandar(String nombre, String domicilio, String nif, String email){
-        clienteNormal = new ClienteNormal(nombre, domicilio, nif, email);
-        datos.getListaClientesNormal().addElemento(clienteNormal);
-        System.out.println("Añadido "+ clienteNormal);
-    }
-
-    /**
-     * Metodo para crear tipo de cliente Premium contemplando Excepción del tipo de dato descuento.
-     * @param nombre
-     * @param domicilio
-     * @param nif
-     * @param email
-     */
-    public void crearClientePremium(String nombre, String domicilio, String nif, String email){
-        System.out.println("La cuota anual para este cliente son 30€");
-        float cuota = 30;// valor fijo para este cliente
-        boolean entradaValida = false;
-        while (!entradaValida) {
-            try {
-                System.out.println("Introduce el descuento: ");
-                float descuento = Float.parseFloat(s.nextLine());
-                clientePremium = new ClientePremium(nombre,domicilio,nif, email, cuota, descuento);
-                datos.getListaClientesPremiun().addElemento(clientePremium);
-                System.out.println("Añadido "+ clientePremium);
-                entradaValida = true;
-            } catch (NumberFormatException e) {
-                System.out.println("Error: debe ingresar un tipo de dato válido!!!");
-            }
+    // Método para crear un nuevo cliente
+    public void crearCliente(String nombre, String domicilio, String nif, String email, int opcion){
+        if (opcion == 1){
+            ClienteNormal clienteNormal = new ClienteNormal(nombre, domicilio, nif, email);
+            datos.getListaClientes().addElemento(clienteNormal);
+            System.out.println("Cliente Standar añadido "+ clienteNormal);
+        }else{
+            ClientePremium clientePremium = new ClientePremium(nombre,domicilio,nif, email);
+            datos.getListaClientes().addElemento(clientePremium);
+            System.out.println("Cliente premiun añadido "+ clientePremium);
         }
     }
-
+    // Método para listar todos los clientes
     public void listarTodosClientes(){
-        listarClientesNormal();
-        listarClientesPremium();
+        for (Cliente cliente: datos.getListaClientes().getLista()) {
+            System.out.println(cliente);
+        }
     }
+    // Método para listar los clientes normales
     public void listarClientesNormal(){
-        int i = 0;
-        for (ClienteNormal clienteNormal: datos.getListaClientesNormal().getLista()){
-            i++;
-            System.out.println("St "+i+" "+clienteNormal);
+        for (Cliente cliente: datos.getListaClientes().getLista()) {
+            if (cliente.tipoCliente().equals("Estandar"))
+                System.out.println(cliente);
         }
     }
+    // Método para listar los clientes premium
     public void listarClientesPremium(){
-        int i = 0;
-        for (ClientePremium clientePremium: datos.getListaClientesPremiun().getLista()){
-            i++;
-            System.out.println("Pr "+i+" "+clientePremium);
+        for (Cliente cliente: datos.getListaClientes().getLista()) {
+            if (cliente.tipoCliente().equals("Premium"))
+                System.out.println(cliente);
         }
     }
-    public void crearArticulo1(){
-        System.out.println("Introduce el codigo: ");
-        String codigo = s.nextLine();
-        System.out.println("Introduce la descripcion: ");
-        String descripcion = s.nextLine();
-        System.out.println("Introduce el precio de venta: ");
-        float precioVenta = s.nextFloat();
-        System.out.println("Introduce los gastos de envio: ");
-        float gastosEnvio = s.nextFloat();
-        System.out.println("Introduce el tiempo de preparación");
-        long tiempo = s.nextLong();
-        articulo = new Articulo(codigo, descripcion, precioVenta, gastosEnvio, tiempo);
-        datos.getListaArticulos().addElemento(articulo);// de las dos maneras se añaden
-        s.nextLine();
+    // Método para crear un nuevo artículo
+    public void crearArticulo(String codigo, String descripcion, float precioVenta, float gastosEnvio, long tiempoPreparacion){
+        Articulo articulo = new Articulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
+        datos.getListaArticulos().addElemento(articulo);
         System.out.println("Articulo creado!!"+articulo);
     }
-
-    public void crearArticulo(){// crear articulo con las excepciones del tipo de datos introducido
-        System.out.println("Introduce el codigo: ");
-        String codigo = s.nextLine();
-        System.out.println("Introduce la descripcion: ");
-        String descripcion = s.nextLine();
-        System.out.println("Introduce el precio de venta: ");
-        float precioVenta = 0;
-        float gastosEnvio = 0;
-        long tiempo = 0;
-        boolean entradaValida = false;
-        while (!entradaValida) {
-            try {
-                precioVenta = Float.parseFloat(s.nextLine());
-                entradaValida = true;
-            } catch (NumberFormatException e) {
-                System.out.println("Error: debe ingresar un tipo de dato válido en el precio de venta!!!");
-            }
-        }
-        entradaValida = false;
-        System.out.println("Introduce los gastos de envio: ");
-        while (!entradaValida) {
-            try {
-                gastosEnvio = Float.parseFloat(s.nextLine());
-                entradaValida = true;
-            } catch (NumberFormatException e) {
-                System.out.println("Error: debe ingresar un tipo de dato válido en los gastos de envío!!!");
-            }
-        }
-        entradaValida = false;
-        System.out.println("Introduce el tiempo de preparación");
-        while (!entradaValida) {
-            try {
-                tiempo = Long.parseLong(s.nextLine());
-                entradaValida = true;
-            } catch (NumberFormatException e) {
-                System.out.println("Error: debe ingresar un tipo de dato válido para el tiempo!!!");
-            }
-        }
-        articulo = new Articulo(codigo, descripcion, precioVenta, gastosEnvio, tiempo);
-        datos.getListaArticulos().addElemento(articulo);
-        System.out.println("Creado !! "+articulo);
-    }
+    // Método para listar todos los artículos
     public void listarArticulos(){
-        int i = 0;
-        for (Articulo articulo : datos.getListaArticulos().getLista()){
-            i++;
-            System.out.println(i+" "+articulo);
+        for (Articulo articulo : datos.getListaArticulos().getLista()){//ver para usar datos.
+            System.out.println(articulo);
+        }
+    }
+    // Método para crear un nuevo pedido
+    public void crearPedido(String email) {
+        Cliente cliente = null;
+        // Comprobar si el cliente existe
+        for (Cliente c : datos.getListaClientes().getLista()) {
+            if (c.getEmail().equals(email)) {
+                cliente = c;
+                break;
+            }
+        }
+        // Si no se encuentra el cliente, crear uno nuevo
+        if (cliente == null) {
+            System.out.println("El cliente con correo electrónico " + email + " no existe.");
+            System.out.println("Creando nuevo cliente...");
+            GestionClientes gestionClientes = new GestionClientes();
+            gestionClientes.datosCliente(this);
+        }
+
+        // Si el cliente no es nulo, listar los artículos disponibles
+        if (cliente != null) {
+            // Listar los artículos disponibles
+            System.out.println("Artículos disponibles:");
+            listarArticulos();
+
+            // Pedir el código del artículo
+            System.out.println("Introduce el código del artículo:");
+            String codigo = s.nextLine();
+
+            // Comprobar si el artículo existe
+            Articulo articulo = null;
+            for (Articulo a : datos.getListaArticulos().getArrayList()) {
+                if (a.getCodigo().equals(codigo)) {
+                    articulo = a;
+                    break;
+                }
+            }
+            if (articulo == null) {
+                System.out.println("El artículo con código " + codigo + " no existe.");
+                System.out.println("Introduce el código del artículo de nuevo:");
+                codigo = s.nextLine();
+            }
+            // Pedir la cantidad del artículo
+            System.out.println("Introduce la cantidad:");
+            int cantidad = s.nextInt();
+            // Obtener el último número de pedido y aumentarlo en 1
+            int numPedido = 1;
+            if (!datos.getListaPedidos().getArrayList().isEmpty()) {
+                Pedido ultimoPedido = datos.getListaPedidos().getArrayList().get(datos.getListaPedidos().getArrayList().size() - 1);
+                numPedido = ultimoPedido.getNumPedido() + 1;
+            }
+            // Crear el pedido
+            LocalDateTime fecha = LocalDateTime.now();
+            Pedido pedido = new Pedido(cliente, articulo, cantidad);
+
+            // Añadir el pedido a la lista de pedidos
+            datos.getListaPedidos().addElemento(pedido);
+
+            System.out.println("Pedido añadido correctamente.");
         }
     }
 }

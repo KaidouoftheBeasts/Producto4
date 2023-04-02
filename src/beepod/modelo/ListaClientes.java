@@ -1,15 +1,15 @@
 package beepod.modelo;
 
-public class ListaPedidos extends Lista<Pedido>{
+public class ListaClientes extends Lista<Cliente>{
     /**
      * constructor
      */
-    public ListaPedidos() {
+    public ListaClientes() {
         super();
     }
 
     @Override
     public String toString() {
-        return "ListaPedidos{} " + super.toString();
+        return "ListaClientes{} " + super.toString();
     }
 }

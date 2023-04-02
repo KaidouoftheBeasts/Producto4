@@ -14,10 +14,9 @@ public class Lista <T> {
 
     /**
      * Constructor
-     * @param lista
      */
-    public Lista(ArrayList<T> lista) {
-        this.lista = lista;
+    public Lista() {
+        lista = new ArrayList<>();
     }
 
     /**
@@ -39,17 +38,8 @@ public class Lista <T> {
         lista.add(t);
     }
 
-    public void borrarElemento(){
-        int i;
-        int index;
-        /**
-         * Lista de elementos disponibles
-         */
-        System.out.println("Seleccionar el número de elemento a borrar");
-        for ( i = 0 ; i < lista.size(); i++){
-        }
-        index = input.nextInt();
-        lista.remove(index);
+    public void borrarElemento(T t){
+        lista.remove(t);
     }
 
     /**
@@ -57,8 +47,7 @@ public class Lista <T> {
      * @return
      */
     public int getSize(){
-        int arrayListSize = lista.size();
-        return arrayListSize;
+        return lista.size();
     }
 
     /**
@@ -67,8 +56,7 @@ public class Lista <T> {
      * @return
      */
     public T getAt(int posicion){
-        T elemento = lista.get(posicion);
-        return elemento;
+        return lista.get(posicion);
     }
 
     /**

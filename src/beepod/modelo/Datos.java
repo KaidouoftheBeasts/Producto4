@@ -2,51 +2,47 @@ package beepod.modelo;
 
 public class Datos {
 
-    private ListaClientesNormal listaClientesNormal;
-    private ListaClientesPremium listaClientesPremiun;
+    //private ListaClientesNormal listaClientes;
+    //private ListaClientesPremium listaClientesPremium;
     private ListaArticulos listaArticulos;
+    private ListaClientes listaClientes;
     private ListaPedidos listaPedidos;
-    private Articulo articulo;
 
-
-    /**
-     * constructor
-     * @param listaClientesNormal
-     * @param listaClientesPremium
-     * @param listaArticulos
-     * @param listaPedidos
-     */
-    public Datos(ListaClientesNormal listaClientesNormal, ListaClientesPremium listaClientesPremium, ListaArticulos listaArticulos, ListaPedidos listaPedidos, Articulo articulo){
-        this.listaClientesNormal = listaClientesNormal;
-        this.listaClientesPremiun = listaClientesPremium;
-        this.listaArticulos = listaArticulos;
-        this.listaPedidos = listaPedidos;
-        this.articulo = articulo;
-    }
-    public Datos(){
+    public Datos() {
+        //listaClientesNormal = new ListaClientesNormal();
+        //listaClientesPremium = new ListaClientesPremium();
+        listaClientes = new ListaClientes();
+        listaArticulos = new ListaArticulos();
+        listaPedidos = new ListaPedidos();
     }
 
-    /**
-     * Getters y Setters
-     * @return
-     */
-    public ListaClientesNormal getListaClientesNormal() {
-        return listaClientesNormal;
+   // public ListaClientesNormal getListaClientesNormal() {
+      //  return listaClientesNormal;
+   // }
+
+  //  public void setListaClientesNormal(ListaClientesNormal listaClientesNormal) {
+   //     this.listaClientesNormal = listaClientesNormal;
+  //  }
+
+  //  public ListaClientesPremium getListaClientesPremium() {
+   //     return listaClientesPremium;
+  //  }
+
+    public ListaClientes getListaClientes() {
+        return listaClientes;
     }
 
-    public void setListaClientesNormal(ListaClientesNormal listaClientesNormal) {
-        this.listaClientesNormal = listaClientesNormal;
-    }
-    public ListaClientesPremium getListaClientesPremiun() {
-        return listaClientesPremiun;
+    public void setListaClientes(ListaClientes listaClientes) {
+        this.listaClientes = listaClientes;
     }
 
-    public void setListaClientesPremiun(ListaClientesPremium listaClientesPremiun) {
-        this.listaClientesNormal = listaClientesNormal;
+    // public void setListaClientesPremium(ListaClientesPremium listaClientesPremium) {
+    //    this.listaClientesPremium = listaClientesPremium;
+  //  }
+
+    public ListaArticulos getListaArticulos() {
+        return listaArticulos;
     }
-
-
-    public ListaArticulos getListaArticulos() { return listaArticulos; }
 
     public void setListaArticulos(ListaArticulos listaArticulos) {
         this.listaArticulos = listaArticulos;

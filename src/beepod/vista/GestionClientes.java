@@ -8,14 +8,10 @@ import java.util.Scanner;
  * Clase para la gestión de los clientes
  */
 public class GestionClientes {
-    private Controlador control = new Controlador();
-
     Scanner teclado = new Scanner(System.in);
-   public GestionClientes(){
+    public GestionClientes(){ }
 
-    }
-
-    public void inicio(){
+    public void inicio(Controlador control){
         boolean salir = false;
         char opcio;
 
@@ -29,7 +25,7 @@ public class GestionClientes {
             opcio = pedirOpcion();
             switch (opcio){
                 case '1':
-                    control.crearClientes();
+                    datosCliente(control);
                     break;
                 case '2':
                     System.out.println("----------------------------------------Lista de todos los Clientes------------------------------------\n");
@@ -59,12 +55,26 @@ public class GestionClientes {
 
     private char pedirOpcion() {
         String resp;
-        System.out.println("Elige la opcion (1,2,3,4 o 0");
+        System.out.println("Elige la opcion (1,2,3,4 o 0): ");
         resp = teclado.nextLine();
         if (resp.isEmpty()){
             resp = " ";
         }
         return resp.charAt(0);
+    }
+
+    public void datosCliente(Controlador control) {
+        System.out.println("Introduce el nombre: ");
+        String nombre = teclado.nextLine();
+        System.out.println("Introduce el domicilio: ");
+        String domicilio = teclado.nextLine();
+        System.out.println("Introduce el nif: ");
+        String nif = teclado.nextLine();
+        System.out.println("Introduce el email: ");
+        String email = teclado.nextLine();
+        System.out.println("Introduce el tipo de cliente: '1' para cliente Normal o '2' para Premium");
+        int opcion = teclado.nextInt();
+        control.crearCliente(nombre, domicilio, nif, email, opcion);
     }
 
 }

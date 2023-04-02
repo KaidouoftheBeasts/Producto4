@@ -2,15 +2,16 @@ package beepod.modelo;
 
 public abstract class Cliente {
     /*
-    * Atributos
-    **/
+     * Atributos
+     **/
     private String nombre;
     private String domicilio;
     private String nif;
     private String email;
-/*
-* Constructores
-* */
+
+    /*
+     * Constructores
+     * */
     public Cliente() {
     }
 
@@ -20,9 +21,10 @@ public abstract class Cliente {
         this.nif = nif;
         this.email = email;
     }
-/*
- * Getters y settters
- */
+
+    /*
+     * Getters y setters
+     */
 
     public String getNombre() {
         return nombre;
@@ -55,6 +57,16 @@ public abstract class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    /*
+     * Métodos abstractos
+     */
+
+    public abstract String tipoCliente();
+
+    public abstract float calcAnual();
+
+    public abstract float descuentoEnv();
 /*
 * toString
 * */
