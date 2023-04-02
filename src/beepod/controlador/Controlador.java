@@ -195,4 +195,9 @@ public class Controlador {
             System.out.println("Se ha producido un error: " + e.getMessage());
         }
     }
+    public void listarPedidosEnviados(){
+        for (Pedido pedido : datos.getListaPedidos().getLista()){
+            System.out.println(pedido);
+        }
+    }
 }

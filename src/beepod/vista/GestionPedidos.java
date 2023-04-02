@@ -8,7 +8,7 @@ import java.util.Scanner;
  * Clase para la gestión de los pedidos
  */
 public class GestionPedidos {
-
+    Controlador control = new Controlador();
     Scanner teclado = new Scanner(System.in);
    public GestionPedidos(){
 
@@ -35,6 +35,7 @@ public class GestionPedidos {
                 case '3':
                     break;
                 case '4':
+                    filtrarPedido(control);
                     break;
                 case '0':
                     salir = true;
@@ -60,5 +61,11 @@ public class GestionPedidos {
         System.out.println("Introduce el correo electrónico del cliente: ");
         String email = teclado.nextLine();
         control.crearPedido(email);
+    }
+    public void filtrarPedido (Controlador control) {
+       // Pedir el nombre del cliente
+        System.out.println("Introduce el nombre del cliente: ");
+        String nombre = teclado.nextLine();
+        control.crearCliente(nombre);
     }
 }
