@@ -117,7 +117,9 @@ public class Controlador {
             // Añadir el pedido a la lista de pedidos
             datos.getListaPedidos().addElemento(pedido);
 
+
             System.out.println("Pedido añadido correctamente.");
+            System.out.println("Total pedido: "+pedido.totalPedido(cantidad,articulo,cliente));
         }
     }
 }
