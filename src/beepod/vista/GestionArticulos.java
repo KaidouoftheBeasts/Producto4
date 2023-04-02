@@ -53,17 +53,20 @@ public class GestionArticulos {
     }
 
     public void datosArticulo(Controlador control) {
-        System.out.println("Introduce el codigo: ");
-        String codigo = teclado.nextLine();
-        System.out.println("Introduce la descripcion: ");
-        String descripcion = teclado.nextLine();
-        System.out.println("Introduce el precio de venta: ");
-        float precioVenta = teclado.nextFloat();
-        System.out.println("Introduce los gastos de envio: ");
-        float gastosEnvio = teclado.nextFloat();
-        System.out.println("Introduce el tiempo de preparación: ");
-        long tiempoPreparacion = teclado.nextLong();
-        control.crearArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
+        try {
+            System.out.println("Introduce el codigo: ");
+            String codigo = teclado.nextLine();
+            System.out.println("Introduce la descripcion: ");
+            String descripcion = teclado.nextLine();
+            System.out.println("Introduce el precio de venta: ");
+            float precioVenta = teclado.nextFloat();
+            System.out.println("Introduce los gastos de envio: ");
+            float gastosEnvio = teclado.nextFloat();
+            System.out.println("Introduce el tiempo de preparación: ");
+            long tiempoPreparacion = teclado.nextLong();
+            control.crearArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error al introducir los datos del artículo: " + e.getMessage());
+        }
     }
-
 }

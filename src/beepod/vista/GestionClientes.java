@@ -58,17 +58,20 @@ public class GestionClientes {
     }
 
     public void datosCliente(Controlador control) {
-        System.out.println("Introduce el nombre: ");
-        String nombre = teclado.nextLine();
-        System.out.println("Introduce el domicilio: ");
-        String domicilio = teclado.nextLine();
-        System.out.println("Introduce el nif: ");
-        String nif = teclado.nextLine();
-        System.out.println("Introduce el email: ");
-        String email = teclado.nextLine();
-        System.out.println("Introduce el tipo de cliente ('1' para cliente Normal o '2' para Premium): ");
-        int opcion = teclado.nextInt();
-        control.crearCliente(nombre, domicilio, nif, email, opcion);
+        try {
+            System.out.println("Introduce el nombre: ");
+            String nombre = teclado.nextLine();
+            System.out.println("Introduce el domicilio: ");
+            String domicilio = teclado.nextLine();
+            System.out.println("Introduce el nif: ");
+            String nif = teclado.nextLine();
+            System.out.println("Introduce el email: ");
+            String email = teclado.nextLine();
+            System.out.println("Introduce el tipo de cliente ('1' para cliente Normal o '2' para Premium): ");
+            int opcion = teclado.nextInt();
+            control.crearCliente(nombre, domicilio, nif, email, opcion);
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error: " + e.getMessage());
+        }
     }
-
 }

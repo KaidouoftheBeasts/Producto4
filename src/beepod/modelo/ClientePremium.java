@@ -37,12 +37,12 @@ public class ClientePremium extends Cliente {
 
     @Override
     public float calcAnual() {
-        return 30.0f;
+        return 30;
     }
 
     @Override
     public float descuentoEnv() {
-        return 0.2f;
+        return (float) 0.2;
     }
 /*
 toString
