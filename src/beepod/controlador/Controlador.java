@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Controlador {
+
     GestionClientes gestionClientes = new GestionClientes();
     Scanner s = new Scanner(System.in);
     private Datos datos;
@@ -21,11 +22,11 @@ public class Controlador {
         if (opcion == 1){
             ClienteNormal clienteNormal = new ClienteNormal(nombre, domicilio, nif, email);
             datos.getListaClientes().addElemento(clienteNormal);
-            System.out.println("Cliente Standar añadido "+ clienteNormal);
+            System.out.println("Cliente Standar añadido: "+ clienteNormal);
         }else{
             ClientePremium clientePremium = new ClientePremium(nombre,domicilio,nif, email);
             datos.getListaClientes().addElemento(clientePremium);
-            System.out.println("Cliente premiun añadido "+ clientePremium);
+            System.out.println("Cliente premiun añadido: "+ clientePremium);
         }
     }
     // Método para listar todos los clientes
@@ -52,11 +53,11 @@ public class Controlador {
     public void crearArticulo(String codigo, String descripcion, float precioVenta, float gastosEnvio, long tiempoPreparacion){
         Articulo articulo = new Articulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
         datos.getListaArticulos().addElemento(articulo);
-        System.out.println("Articulo creado!!"+articulo);
+        System.out.println("Articulo creado: "+articulo);
     }
     // Método para listar todos los artículos
     public void listarArticulos(){
-        for (Articulo articulo : datos.getListaArticulos().getLista()){//ver para usar datos.
+        for (Articulo articulo : datos.getListaArticulos().getLista()){
             System.out.println(articulo);
         }
     }
@@ -81,11 +82,11 @@ public class Controlador {
         // Si el cliente no es nulo, listar los artículos disponibles
         if (cliente != null) {
             // Listar los artículos disponibles
-            System.out.println("Artículos disponibles:");
+            System.out.println("Artículos disponibles: ");
             listarArticulos();
 
             // Pedir el código del artículo
-            System.out.println("Introduce el código del artículo:");
+            System.out.println("Introduce el código del artículo: ");
             String codigo = s.nextLine();
 
             // Comprobar si el artículo existe
@@ -98,11 +99,11 @@ public class Controlador {
             }
             if (articulo == null) {
                 System.out.println("El artículo con código " + codigo + " no existe.");
-                System.out.println("Introduce el código del artículo de nuevo:");
+                System.out.println("Introduce el código del artículo de nuevo: ");
                 codigo = s.nextLine();
             }
             // Pedir la cantidad del artículo
-            System.out.println("Introduce la cantidad:");
+            System.out.println("Introduce la cantidad: ");
             int cantidad = s.nextInt();
             // Obtener el último número de pedido y aumentarlo en 1
             int numPedido = 1;

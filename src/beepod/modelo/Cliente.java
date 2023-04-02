@@ -72,7 +72,7 @@ public abstract class Cliente {
 * */
     @Override
     public String toString() {
-        return "Cliente nombre: "+nombre+", domicilio: "+domicilio+", nif: "+nif+", email: "+email;
+        return "Cliente nombre: "+nombre+", Domicilio: "+domicilio+", NIF: "+nif+", Email: "+email;
 
     }
 }

@@ -8,7 +8,6 @@ import java.util.Scanner;
  * Clase para la gestión de los Articulos
  */
 public class GestionArticulos {
-    //Controlador control = new Controlador();
     Scanner teclado = new Scanner(System.in);
    public GestionArticulos(){
 
@@ -62,7 +61,7 @@ public class GestionArticulos {
         float precioVenta = teclado.nextFloat();
         System.out.println("Introduce los gastos de envio: ");
         float gastosEnvio = teclado.nextFloat();
-        System.out.println("Introduce el tiempo de preparación");
+        System.out.println("Introduce el tiempo de preparación: ");
         long tiempoPreparacion = teclado.nextLong();
         control.crearArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
     }

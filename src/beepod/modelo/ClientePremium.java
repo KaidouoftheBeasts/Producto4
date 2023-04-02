@@ -5,9 +5,7 @@ public class ClientePremium extends Cliente {
     private float cuota;
     private float descuento;
 
-    public ClientePremium(){
-
-    }
+    public ClientePremium(){ }
     public ClientePremium(String nombre, String domicilio, String nif, String email) {
         super(nombre, domicilio, nif, email);
         cuota = 30;
@@ -51,6 +49,6 @@ toString
  */
     @Override
     public String toString() {
-        return  super.toString()+" cuota: "+cuota+ " descuento"+descuento;
+        return  super.toString()+" Cuota: "+cuota+ " Descuento: "+descuento;
     }
 }
