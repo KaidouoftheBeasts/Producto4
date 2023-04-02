@@ -49,6 +49,6 @@ toString
  */
     @Override
     public String toString() {
-        return  super.toString() + " Cuota: " + cuota + " Descuento: " + descuento * 100 + "%";
+        return  super.toString() + " Cuota: " + cuota + "€ Descuento: " + descuento * 100 + "%";
     }
 }
