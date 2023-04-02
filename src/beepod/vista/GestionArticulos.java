@@ -66,6 +66,7 @@ public class GestionArticulos {
         float gastosEnvio = teclado.nextFloat();
         System.out.println("Introduce el tiempo de preparación");
         long tiempoPreparacion = teclado.nextLong();
+        teclado.nextLine();
         control.crearArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
     }
 

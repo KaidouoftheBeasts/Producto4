@@ -74,6 +74,7 @@ public class GestionClientes {
         String email = teclado.nextLine();
         System.out.println("Introduce el tipo de cliente: '1' para cliente Normal o '2' para Premium");
         int opcion = teclado.nextInt();
+        teclado.nextLine();
         control.crearCliente(nombre, domicilio, nif, email, opcion);
     }
 
