@@ -13,10 +13,10 @@ public class TestJunit extends TestCase {
         Articulo articulo = new Articulo("1", "Prueba Test", 20, 10, 10);
         float resultadoEsperado = 10;
         float resultado = articulo.getGastosEnvio();
-        assertEquals(resultadoEsperado,resultado);
-        fail("El Test es ok!!");
+        assertTrue("Resultado no esperado ",resultadoEsperado==resultado);
+        System.out.println("La función funciona correctamente");
+
     }
-    //String codigo, String descripcion, float precioVenta, float gastosEnvio, long tiempoPreparacion
     @Test
     public void testTotalPedido(){
 
@@ -25,7 +25,10 @@ public class TestJunit extends TestCase {
         Pedido pedido = new Pedido();
         float resultadoEsperado = 208;
         float resultado = pedido.totalPedido(10,articulo,clientePremium);
-        assertEquals(resultadoEsperado,resultado);
-        fail("El Test del pedido es ok!!");
+        assertTrue("El pedido no lo calcula correctamente ", resultadoEsperado==resultado);
+        System.out.println("El pedido está correcto");
     }
 }
+
+
+
