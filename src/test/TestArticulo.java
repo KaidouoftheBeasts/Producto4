@@ -8,7 +8,7 @@ public class TestArticulo extends TestCase {
 
 
     public void inicializar(){
-       articulo= new Articulo("3", "hola",5,12,2);
+       articulo= new Articulo("5", "hola",5,12,2);
     }
     @Test
     public void testSetArticulo(){

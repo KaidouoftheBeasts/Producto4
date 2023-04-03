@@ -17,7 +17,7 @@ public class TestClientePremiun {
     @Test
     public void testSetArticulo(){
         inicializar();
-        clientePremium.setNombre("Jose");
+        //clientePremium.setNombre("Jose");
         assertEquals("Jose",clientePremium.getNombre());
     }
 
