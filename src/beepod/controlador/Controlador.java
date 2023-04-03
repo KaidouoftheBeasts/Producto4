@@ -4,6 +4,7 @@ import beepod.modelo.*;
 import beepod.vista.GestionClientes;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
 public class Controlador {
@@ -178,6 +179,7 @@ public class Controlador {
 
                 // Crear el pedido
                 LocalDateTime fecha = LocalDateTime.now();
+
                 Pedido pedido = new Pedido(cliente, articulo, cantidad);
 
                 pedido.setTotal(total);
@@ -195,4 +197,56 @@ public class Controlador {
             System.out.println("Se ha producido un error: " + e.getMessage());
         }
     }
+    public void eliminarPedido (int numPedido){
+        boolean encontrado = false;
+        Pedido pedidoEncontrado = null;
+
+        //Mostrar pedidos disponibles
+
+        for (Pedido pedido : datos.getListaPedidos().getLista()) {
+            // Comprobar si el num del pedido actual es igual a un num de pedido de la lista
+            if (pedido.getNumPedido() == numPedido) {
+                encontrado = true;
+                pedidoEncontrado = pedido;
+            }
+        }
+
+        if(encontrado){
+            for (Articulo articulo : datos.getListaArticulos().getLista()) {
+                //Busqueda de tiempo de preparacion del articulo
+                if (articulo.getCodigo().equals(pedidoEncontrado.getArticulo().getCodigo())) {
+
+                    //Calculo de minutos pasados entre la creación del pedido y la fecha actual para saber
+                    LocalDateTime fechaActual = LocalDateTime.now();
+                    LocalDateTime fechaPedido = pedidoEncontrado.getFecha();
+                    long diferenciaMinutos = ChronoUnit.MINUTES.between(fechaPedido, fechaActual);
+
+                    //Tiempo de preparación del articulo seleccionado
+                    long tiempoPreparacion = articulo.getTiempoPreparacion();
+
+                    //Comprueba si envio no ha sido enviado
+                    if(diferenciaMinutos < tiempoPreparacion){
+                        //Confirmacion de borrado
+                        System.out.println("¿Seguro que quiere borrar el pedido? Pulse 1 para borrar o 2 para cancelar: ");
+                        int opcion= s.nextInt();
+                            if(opcion == 1){
+                                datos.getListaPedidos().getLista().remove(pedidoEncontrado);
+                                System.out.println("El pedido" + numPedido + " ha sido eliminado con exito.");
+                            }
+
+                    } else {
+                        //No borra por que esta enviado y setea isEnviado del pedido a true
+                        System.out.println("El pedido ya esta enviado y por tanto no se puede eliminar.");
+                        pedidoEncontrado.setEnviado(true);
+                    }
+
+                }
+            }
+        }
+        //Pedido no existe asi que sale de la opcion de eliminar
+        else {
+            System.out.println("El número de pedido no corresponde a ningún pedido existente.");
+        }
+    }
+
 }

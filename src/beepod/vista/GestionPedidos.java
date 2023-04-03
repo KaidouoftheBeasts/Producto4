@@ -31,6 +31,7 @@ public class GestionPedidos {
                     datosPedido(control);
                     break;
                 case '2':
+                    datosPedidoEliminar(control);
                     break;
                 case '3':
                     break;
@@ -61,4 +62,14 @@ public class GestionPedidos {
         String email = teclado.nextLine();
         control.crearPedido(email);
     }
-}
+    public void datosPedidoEliminar(Controlador control){
+            System.out.println("Introduce el código del pedido: ");
+            int idPedido = teclado.nextInt();
+            teclado.nextLine();
+            control.eliminarPedido(idPedido);
+        }
+
+    }
+
+
+
