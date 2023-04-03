@@ -64,12 +64,6 @@ public class GestionPedidos {
         control.crearPedido(email);
     }
 
-    public void filtrarPedido (Controlador control) {
-       // Pedir el nombre del cliente
-        System.out.println("Introduce el nombre del cliente: ");
-        String nombre = teclado.nextLine();
-        control.crearCliente(nombre);
-    }
 
 
     public void datosPedidoEliminar(Controlador control){
@@ -77,8 +71,15 @@ public class GestionPedidos {
             int idPedido = teclado.nextInt();
             teclado.nextLine();
             control.eliminarPedido(idPedido);
-        }
+   }
 
+
+
+    public void filtrarPedido (Controlador control) {
+        // Pedir el nombre del cliente
+        System.out.println("Introduce el nombre del cliente: ");
+        String nombre = teclado.nextLine();
+        control.crearCliente(nombre);
     }
 
 

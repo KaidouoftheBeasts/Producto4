@@ -248,11 +248,23 @@ public class Controlador {
         else {
             System.out.println("El número de pedido no corresponde a ningún pedido existente.");
         }
-        public void listarPedidosEnviados(){
-            for (Pedido pedido : datos.getListaPedidos().getLista()){
-                System.out.println(pedido);
+    }
+        public void filtrarPedidosPorNombreCliente(String cliente) {
+            // Recorremos la lista de pedidos
+            for (Pedido pedido : datos.getListaPedidos().getLista()) {
+                // Obtenemos el correo electrónico del cliente asociado al pedido
+                String correoCliente = pedido.getCliente().getEmail();
+
+                // Buscamos el cliente en la lista de clientes
+                for (Cliente cliente : datos.getListaClientes().getLista()) {
+                    if (cliente.getEmail().equals(correoCliente) && cliente.getNombre().equals(cliente)) {
+                        // Si el nombre del cliente se corresponde con el nombre que estamos buscando, imprimimos el pedido
+                        System.out.println(pedido);
+                        break;
+                    }
+                }
             }
         }
-    }
+
 
 }
