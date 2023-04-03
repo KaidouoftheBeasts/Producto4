@@ -11,6 +11,7 @@ public class Pedido {
     private int cantidad;
     private LocalDateTime fecha;
     private boolean enviado;
+    private float total;
 /*Constructores
 * */
 
@@ -24,6 +25,7 @@ public class Pedido {
         this.cantidad = cantidad;
         this.fecha = LocalDateTime.now();
         this.enviado = false;
+        this.total = total;
     }
 /*
 * Getters y Setters
@@ -72,6 +74,22 @@ public class Pedido {
         return enviado;
     }
 
+    public static int getUltimoNumPedido() {
+        return ultimoNumPedido;
+    }
+
+    public static void setUltimoNumPedido(int ultimoNumPedido) {
+        Pedido.ultimoNumPedido = ultimoNumPedido;
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
+
     public void setEnviado(boolean enviado) {
         this.enviado = enviado;
     }
@@ -84,14 +102,15 @@ public class Pedido {
 * toString*/
     @Override
     public String toString() {
-        return "Pedido{" +
-                "numPedido=" + numPedido +
-                ", cliente=" + cliente +
-                ", articulo=" + articulo +
-                ", cantidad=" + cantidad +
-                ", fecha=" + fecha +
-                ", enviado=" + enviado +
-                '}';
+        return "Pedido{\n" +
+                "ID Pedido: " + numPedido +
+                "\nCliente: " + cliente +
+                "\nArticulo: " + articulo +
+                "\nCantidad: " + cantidad +
+                "\nTotal: " + total + "€" +
+                "\nFecha: " + fecha +
+                "\nEnviado: " + enviado +
+                "}\n";
     }
 
 }

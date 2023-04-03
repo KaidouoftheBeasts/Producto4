@@ -71,7 +71,7 @@ public class Lista <T> {
     @Override
     public String toString() {
         return "Lista{" +
-                "lista=" + lista +
+                "lista: " + lista +
                 '}';
     }
 }

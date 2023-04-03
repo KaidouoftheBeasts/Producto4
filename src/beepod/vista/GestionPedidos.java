@@ -1,7 +1,6 @@
 package beepod.vista;
 
 import beepod.controlador.Controlador;
-import beepod.modelo.Articulo;
 
 import java.util.Scanner;
 
@@ -42,15 +41,13 @@ public class GestionPedidos {
                     break;
                 default:
                     System.out.println("Opción incorrecta!!");
-
             }
-
         }while (!salir);
     }
 
     private char pedirOpcion() {
         String resp;
-        System.out.println("Elige la opcion (1,2,3,4 o 0");
+        System.out.println("Elige la opcion (1,2,3,4 o 0): ");
         resp = teclado.nextLine();
         if (resp.isEmpty()){
             resp = " ";
@@ -60,7 +57,7 @@ public class GestionPedidos {
 
     public void datosPedido(Controlador control) {
         // Pedir el correo electrónico del cliente
-        System.out.println("Introduce el correo electrónico del cliente:");
+        System.out.println("Introduce el correo electrónico del cliente: ");
         String email = teclado.nextLine();
         control.crearPedido(email);
     }

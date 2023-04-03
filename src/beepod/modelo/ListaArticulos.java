@@ -10,6 +10,6 @@ public class ListaArticulos extends Lista<Articulo>{
 
     @Override
     public String toString() {
-        return "ListaArticulos{} " + super.toString();
+        return "ListaArticulos: " + super.toString();
     }
 }
