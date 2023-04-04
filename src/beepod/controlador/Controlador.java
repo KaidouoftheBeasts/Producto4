@@ -286,9 +286,3 @@ public class Controlador {
     }
 }
 
-
- /*if (cliente.getNombre().equals(cliente)) {
-                        // Si el nombre del cliente se corresponde con el nombre que estamos buscando, imprimimos el pedido
-                        System.out.println(pedido.toString());
-                        break;
-                    }*/
