@@ -96,12 +96,14 @@ public class Controlador {
             System.out.println(articulo);
         }
     }
-        public void mostrarPedidosPendientes(){
+       
+	
+	public void mostrarPedidosPendientes(){
         boolean cancelar = false;
         char opcio;
         do{
-            System. out. println("1. Show all Pending Orders");
-            System. out. println("2. Filter by Client");
+            System. out. println("1. Mostrar pedidos pendientes");
+            System. out. println("2. Filtrar por clientes");
             System. out. println("0. Salir");
             opcio = pedirOpcion();
             switch (opcio) {
@@ -129,7 +131,7 @@ public class Controlador {
         }
     }
     public void filtrarClientePend(){
-        System. out. println("Enter customer email: ");
+        System. out. println("Ingrese su Email: ");
         String email = keyboard. nextLine();
         ArrayList<String> fClientePendiente = controlador. filtrarClientePendiente(email) ;
         for(String f : fClientePendiente){
