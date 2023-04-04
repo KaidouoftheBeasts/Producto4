@@ -90,6 +90,7 @@ public class Controlador {
             System.out.println("Ha ocurrido un error al listar los artículos: " + e.getMessage());
         }
     }
+
     // Método para crear un nuevo pedido
     public void crearPedido(String email) {
         try {
@@ -198,7 +199,7 @@ public class Controlador {
         }
     }
 
-    public void eliminarPedido (int numPedido){
+    public void eliminarPedido(int numPedido) {
         boolean encontrado = false;
         Pedido pedidoEncontrado = null;
 
@@ -212,7 +213,7 @@ public class Controlador {
             }
         }
 
-        if(encontrado){
+        if (encontrado) {
             for (Articulo articulo : datos.getListaArticulos().getLista()) {
                 //Busqueda de tiempo de preparacion del articulo
                 if (articulo.getCodigo().equals(pedidoEncontrado.getArticulo().getCodigo())) {
@@ -226,14 +227,14 @@ public class Controlador {
                     long tiempoPreparacion = articulo.getTiempoPreparacion();
 
                     //Comprueba si envio no ha sido enviado
-                    if(diferenciaMinutos < tiempoPreparacion){
+                    if (diferenciaMinutos < tiempoPreparacion) {
                         //Confirmacion de borrado
                         System.out.println("¿Seguro que quiere borrar el pedido? Pulse 1 para borrar o 2 para cancelar: ");
-                        int opcion= s.nextInt();
-                            if(opcion == 1){
-                                datos.getListaPedidos().getLista().remove(pedidoEncontrado);
-                                System.out.println("El pedido" + numPedido + " ha sido eliminado con exito.");
-                            }
+                        int opcion = s.nextInt();
+                        if (opcion == 1) {
+                            datos.getListaPedidos().getLista().remove(pedidoEncontrado);
+                            System.out.println("El pedido" + numPedido + " ha sido eliminado con exito.");
+                        }
 
                     } else {
                         //No borra por que esta enviado y setea isEnviado del pedido a true
@@ -249,22 +250,45 @@ public class Controlador {
             System.out.println("El número de pedido no corresponde a ningún pedido existente.");
         }
     }
-        public void filtrarPedidosPorNombreCliente(String cliente) {
-            // Recorremos la lista de pedidos
-            for (Pedido pedido : datos.getListaPedidos().getLista()) {
-                // Obtenemos el correo electrónico del cliente asociado al pedido
-                String correoCliente = pedido.getCliente().getEmail();
 
-                // Buscamos el cliente en la lista de clientes
-                for (Cliente cliente : datos.getListaClientes().getLista()) {
-                    if (cliente.getEmail().equals(correoCliente) && cliente.getNombre().equals(cliente)) {
-                        // Si el nombre del cliente se corresponde con el nombre que estamos buscando, imprimimos el pedido
-                        System.out.println(pedido);
-                        break;
-                    }
-                }
+    public void filtrarPedidosPorNombreCliente(String nombre) {
+        boolean encontrado = false;
+        Cliente clienteEncontrado = null;
+        for (Cliente cliente : datos.getListaClientes().getLista()) {
+            if (cliente.getNombre().equals(nombre)) {
+                encontrado = true;
+                clienteEncontrado = cliente;
             }
         }
+        if (encontrado) {
+            for (Pedido pedidos : datos.getListaPedidos().getLista()) {
+                //Busqueda de tiempo de preparacion del articulo
+                if (pedidos.getCliente().equals(clienteEncontrado)) {
+                    for (Articulo articulo : datos.getListaArticulos().getLista()) {
+                        //Calculo de minutos pasados entre la creación del pedido y la fecha actual para saber
+                        LocalDateTime fechaActual = LocalDateTime.now();
+                        LocalDateTime fechaPedido = pedidos.getFecha();
+                        long diferenciaMinutos = ChronoUnit.MINUTES.between(fechaPedido, fechaActual);
 
+                        //Tiempo de preparación del articulo seleccionado
+                        long tiempoPreparacion = articulo.getTiempoPreparacion();
 
+                        //Comprueba si envio no ha sido enviado
+                        if (diferenciaMinutos > tiempoPreparacion) {
+                            System.out.println(pedidos.toString());
+                        }
+                    }
+                    pedidos.setEnviado(true);
+                }
+
+            }
+        }
+    }
 }
+
+
+ /*if (cliente.getNombre().equals(cliente)) {
+                        // Si el nombre del cliente se corresponde con el nombre que estamos buscando, imprimimos el pedido
+                        System.out.println(pedido.toString());
+                        break;
+                    }*/
