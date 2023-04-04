@@ -96,4 +96,44 @@ public class Controlador {
             System.out.println(articulo);
         }
     }
+        public void mostrarPedidosPendientes(){
+        boolean cancelar = false;
+        char opcio;
+        do{
+            System. out. println("1. Show all Pending Orders");
+            System. out. println("2. Filter by Client");
+            System. out. println("0. Salir");
+            opcio = pedirOpcion();
+            switch (opcio) {
+                case '1':
+                    motrarTodosPendientes();
+                    break;
+                case '2':
+                    filtrarClientePend();
+                    break;
+                case '0':
+                    cancelar = true;
+            }
+        } while (! cancelar);
+    }
+    private char pedirOpcion() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void motrarTodosPendientes() {
+        Object controlador;
+		ArrayList<String> aTodosPend = controlador. todosPendientes();
+        for (String tP : atodosPend) {
+            System. out. println(aTodosPend);
+        }
+    }
+    public void filtrarClientePend(){
+        System. out. println("Enter customer email: ");
+        String email = keyboard. nextLine();
+        ArrayList<String> fClientePendiente = controlador. filtrarClientePendiente(email) ;
+        for(String f : fClientePendiente){
+            System. out. println(fClientePendiente);
+        }
+    }
 }
