@@ -8,7 +8,6 @@ import java.util.Scanner;
  * Clase para la gestión de los Articulos
  */
 public class GestionArticulos {
-    //Controlador control = new Controlador();
     Scanner teclado = new Scanner(System.in);
    public GestionArticulos(){
 
@@ -30,9 +29,7 @@ public class GestionArticulos {
                     datosArticulo(control);
                     break;
                 case '2':
-                    System.out.println("-----------------------------------------Lista de los articulos---------------------------------------\n");
                     control.listarArticulos();
-                    System.out.println("-------------------------------------------------------------------------------------------------------\n");
                     break;
                 case '0':
                     salir = true;
@@ -47,7 +44,7 @@ public class GestionArticulos {
 
     private char pedirOpcion() {
         String resp;
-        System.out.println("Elige la opcion (1,2 o 0)");
+        System.out.println("Elige la opcion (1,2 o 0): ");
         resp = teclado.nextLine();
         if (resp.isEmpty()){
             resp = " ";
@@ -56,18 +53,21 @@ public class GestionArticulos {
     }
 
     public void datosArticulo(Controlador control) {
-        System.out.println("Introduce el codigo: ");
-        String codigo = teclado.nextLine();
-        System.out.println("Introduce la descripcion: ");
-        String descripcion = teclado.nextLine();
-        System.out.println("Introduce el precio de venta: ");
-        float precioVenta = teclado.nextFloat();
-        System.out.println("Introduce los gastos de envio: ");
-        float gastosEnvio = teclado.nextFloat();
-        System.out.println("Introduce el tiempo de preparación");
-        long tiempoPreparacion = teclado.nextLong();
-        teclado.nextLine();
-        control.crearArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
+        try {
+            System.out.println("Introduce el codigo: ");
+            String codigo = teclado.nextLine();
+            System.out.println("Introduce la descripcion: ");
+            String descripcion = teclado.nextLine();
+            System.out.println("Introduce el precio de venta: ");
+            float precioVenta = teclado.nextFloat();
+            System.out.println("Introduce los gastos de envio: ");
+            float gastosEnvio = teclado.nextFloat();
+            System.out.println("Introduce el tiempo de preparación: ");
+            long tiempoPreparacion = teclado.nextLong();
+            teclado.nextLine();
+            control.crearArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error al introducir los datos del artículo: " + e.getMessage());
+        }
     }
-
 }
