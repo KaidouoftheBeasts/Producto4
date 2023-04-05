@@ -76,9 +76,9 @@ public class GestionPedidos {
 
     public void filtrarPedido(Controlador control) {
         // Pedir el nombre del cliente
-        System.out.println("Introduce el nombre del cliente: ");
-        String nombre = teclado.nextLine();
-        control.filtrarPedidosPorNombreCliente(nombre);
+        System.out.println("Introduce el email del cliente: ");
+        String email = teclado.nextLine();
+        control.filtrarPedidosPorNombreCliente(email);
     }
 }
 
