@@ -5,7 +5,9 @@ public class ClientePremium extends Cliente {
     private float cuota;
     private float descuento;
 
-    public ClientePremium(){ }
+    public ClientePremium(){
+
+    }
     public ClientePremium(String nombre, String domicilio, String nif, String email) {
         super(nombre, domicilio, nif, email);
         cuota = 30;
@@ -37,18 +39,18 @@ public class ClientePremium extends Cliente {
 
     @Override
     public float calcAnual() {
-        return 30;
+        return 30.0f;
     }
 
     @Override
     public float descuentoEnv() {
-        return (float) 0.2;
+        return 0.2f;
     }
 /*
 toString
  */
     @Override
     public String toString() {
-        return  super.toString() + " Cuota: " + cuota + "€ Descuento: " + descuento * 100 + "%";
+        return  "Cliente Premium: "+super.toString()+" cuota: "+cuota+" €uros" +" descuento "+descuento*100+ " %";
     }
 }

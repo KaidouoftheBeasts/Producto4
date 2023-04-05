@@ -28,13 +28,19 @@ public class GestionClientes {
                     datosCliente(control);
                     break;
                 case '2':
+                    System.out.println("----------------------------------------Lista de todos los Clientes------------------------------------\n");
                     control.listarTodosClientes();
+                    System.out.println("-------------------------------------------------------------------------------------------------------\n");
                     break;
                 case '3':
+                    System.out.println("------------------------------------------Lista los clientes Standar------------------------------------\n");
                     control.listarClientesNormal();
+                    System.out.println("--------------------------------------------------------------------------------------------------------\n");
                     break;
                 case '4':
+                    System.out.println("-------------------------------------------Lista los clientes Premium-----------------------------------\n");
                     control.listarClientesPremium();
+                    System.out.println("---------------------------------------------------------------------------------------------------------\n");
                     break;
                 case '0':
                     salir = true;
@@ -58,21 +64,18 @@ public class GestionClientes {
     }
 
     public void datosCliente(Controlador control) {
-        try {
-            System.out.println("Introduce el nombre: ");
-            String nombre = teclado.nextLine();
-            System.out.println("Introduce el domicilio: ");
-            String domicilio = teclado.nextLine();
-            System.out.println("Introduce el nif: ");
-            String nif = teclado.nextLine();
-            System.out.println("Introduce el email: ");
-            String email = teclado.nextLine();
-            System.out.println("Introduce el tipo de cliente ('1' para cliente Normal o '2' para Premium): ");
-            int opcion = teclado.nextInt();
-            teclado.nextLine();
-            control.crearCliente(nombre, domicilio, nif, email, opcion);
-        } catch (Exception e) {
-            System.out.println("Se ha producido un error: " + e.getMessage());
-        }
+        System.out.println("Introduce el nombre: ");
+        String nombre = teclado.nextLine();
+        System.out.println("Introduce el domicilio: ");
+        String domicilio = teclado.nextLine();
+        System.out.println("Introduce el nif: ");
+        String nif = teclado.nextLine();
+        System.out.println("Introduce el email: ");
+        String email = teclado.nextLine();
+        System.out.println("Introduce el tipo de cliente: '1' para cliente Normal o '2' para Premium");
+        int opcion = teclado.nextInt();
+        teclado.nextLine();
+        control.crearCliente(nombre, domicilio, nif, email, opcion);
     }
+
 }

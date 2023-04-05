@@ -93,6 +93,11 @@ public class Pedido {
     public void setEnviado(boolean enviado) {
         this.enviado = enviado;
     }
+    public float totalPedido(int cantidad, Articulo articulo, Cliente cliente){//ver el caso práctico para saber si el descuento se aplica solo en los gastos de envío.
+        float total;
+        total = (cantidad * articulo.getPrecioVenta()) + (articulo.getGastosEnvio()*(1-cliente.descuentoEnv()));
+        return total;
+    }
 /*
 * toString*/
     @Override
@@ -107,4 +112,5 @@ public class Pedido {
                 "\nEnviado: " + enviado +
                 "}\n";
     }
+
 }
