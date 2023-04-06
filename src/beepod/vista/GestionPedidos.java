@@ -35,9 +35,10 @@ public class GestionPedidos {
                     datosPedidoEliminar(control);
                     break;
                 case '3':
+                    filtrarPedidoPendiente(control);
                     break;
                 case '4':
-                    filtrarPedido(control);
+                    filtrarPedidoEnviado(control);
                     break;
                 case '0':
                     salir = true;
@@ -60,6 +61,7 @@ public class GestionPedidos {
 
     public void datosPedido(Controlador control) {
         // Pedir el correo electrónico del cliente
+
         System.out.println("Introduce el correo electrónico del cliente: ");
         String email = teclado.nextLine();
         control.crearPedido(email);
@@ -67,20 +69,63 @@ public class GestionPedidos {
 
 
     public void datosPedidoEliminar(Controlador control) {
-        System.out.println("Introduce el código del pedido: ");
-        int idPedido = teclado.nextInt();
-        teclado.nextLine();
-        control.eliminarPedido(idPedido);
+        try {
+            System.out.println("Introduce el código del pedido: ");
+            int idPedido = teclado.nextInt();
+            teclado.nextLine();
+            control.eliminarPedido(idPedido);
+        }  catch (Exception e) {
+            System.out.println("Se ha producido un error: " + e.getMessage());
+        }
+    }
+
+    public void filtrarPedidoPendiente(Controlador control) {
+
+        try {
+            System.out.println("Elige la opción: ('1' Para mostrar todos o '2' Para mostrar por cliente): ");
+            int opcion = teclado.nextInt();
+            teclado.nextLine();
+            if (opcion == 1) {
+                control.filtrarPedidosPendientes();
+            } else if (opcion == 2) {
+                System.out.println("Introduce el email del cliente: ");
+                String email = teclado.nextLine();
+                control.filtrarPedidosPendientesPorNombreCliente(email);
+            } else {
+                teclado.nextLine();
+                System.out.println("No se escogió una opción válida. Saliendo al menu...");
+            }
+        }  catch (Exception e) {
+            System.out.println("Se ha producido un error: " + e.getMessage());
+        }
+
     }
 
 
-    public void filtrarPedido(Controlador control) {
-        // Pedir el nombre del cliente
-        System.out.println("Introduce el email del cliente: ");
-        String email = teclado.nextLine();
-        control.filtrarPedidosPorNombreCliente(email);
+    public void filtrarPedidoEnviado(Controlador control) {
+
+        try {
+            System.out.println("Elige la opción: ('1' Para mostrar todos o '2' Para mostrar por cliente): ");
+            int opcion = teclado.nextInt();
+            teclado.nextLine();
+            if (opcion == 1) {
+                control.filtrarPedidosEnviados();
+            } else if (opcion == 2) {
+                System.out.println("Introduce el email del cliente: ");
+                String email = teclado.nextLine();
+                control.filtrarPedidosEnviadosPorNombreCliente(email);
+            } else {
+                teclado.nextLine();
+                System.out.println("No se escogió una opción válida. Saliendo al menu...");
+            }
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error: " + e.getMessage());
+        }
+
     }
 }
+
+
 
 
 

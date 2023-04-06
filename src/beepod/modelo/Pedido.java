@@ -101,14 +101,12 @@ public class Pedido {
         LocalDateTime fechaPedido = getFecha();
         long diferenciaMinutos = ChronoUnit.MINUTES.between(fechaPedido, fechaActual);
 
+
         //Tiempo de preparación del articulo seleccionado
         long tiempoPreparacion = articulo.getTiempoPreparacion();
 
         //Comprueba si envio no ha sido enviado
-        if (diferenciaMinutos > tiempoPreparacion) {
-            return true;
-        }
-        return false;
+        return diferenciaMinutos >= tiempoPreparacion;
     }
 
     public float totalPedido(int cantidad, Articulo articulo, Cliente cliente){//ver el caso práctico para saber si el descuento se aplica solo en los gastos de envío.
