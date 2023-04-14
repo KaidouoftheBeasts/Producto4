@@ -4,6 +4,8 @@ import beepod.modelo.*;
 import beepod.vista.GestionClientes;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Controlador {
@@ -141,16 +143,7 @@ public class Controlador {
                     return;
                 }
 
-                // Guardar el precio original del envío
-                float precioOriginal = articulo.getGastosEnvio();
-
-                // Aplicar el descuento si el cliente es premium
-                if (cliente instanceof ClientePremium) {
-                    ClientePremium clientePremium = (ClientePremium) cliente;
-                    float descuento = clientePremium.getDescuento();
-                    float precioConDescuento = articulo.getGastosEnvio() * (1 - descuento);
-                    articulo.setGastosEnvio(precioConDescuento);
-                }
+                float precioConDescuento = articulo.getGastosEnvio() * (1 - cliente.descuentoEnv());
 
                 // Pedir la cantidad del artículo
                 System.out.println("Introduce la cantidad (debe ser un número entero): ");
@@ -186,13 +179,138 @@ public class Controlador {
                 datos.getListaPedidos().addElemento(pedido);
 
                 System.out.println("Pedido añadido correctamente.");
-                System.out.println(pedido.toString());
+                System.out.print(pedido.toString());
+                System.out.println("Envio con descuento: " + precioConDescuento + "€\n");
 
-                // Restaurar el precio original del envío después de crear el pedido
-                articulo.setGastosEnvio(precioOriginal);
             }
         } catch (Exception e) {
             System.out.println("Se ha producido un error: " + e.getMessage());
         }
+    }
+
+    public void eliminarPedido (int numPedido){
+        boolean encontrado = false;
+        Pedido pedidoEncontrado = null;
+
+        //Mostrar pedidos disponibles
+
+        for (Pedido pedido : datos.getListaPedidos().getLista()) {
+            // Comprobar si el num del pedido actual es igual a un num de pedido de la lista
+            if (pedido.getNumPedido() == numPedido) {
+                encontrado = true;
+                pedidoEncontrado = pedido;
+            }
+        }
+
+        if(encontrado){
+            for (Articulo articulo : datos.getListaArticulos().getLista()) {
+                //Busqueda de tiempo de preparacion del articulo
+                if (articulo.getCodigo().equals(pedidoEncontrado.getArticulo().getCodigo())) {
+                    //Comprueba si envio no ha sido enviado*/
+                    if(!pedidoEncontrado.pedidoEnviado()){
+                        //Confirmacion de borrado
+                            datos.getListaPedidos().getLista().remove(pedidoEncontrado);
+                            System.out.println("El pedido" + numPedido + " ha sido eliminado con exito.");
+
+                    } else {
+                        //No borra por que esta enviado y setea isEnviado del pedido a true
+                        System.out.println("El pedido ya esta enviado y por tanto no se puede eliminar.");
+                        pedidoEncontrado.setEnviado(true);
+                    }
+                }
+            }
+        }
+        //Pedido no existe asi que sale de la opcion de eliminar
+        else {
+            System.out.println("El número de pedido no corresponde a ningún pedido existente.");
+        }
+    }
+
+    public void filtrarPedidosPendientesPorNombreCliente(String email) {
+        boolean encontrado = false;
+        Cliente clienteEncontrado = null;
+        if(datos.getListaPedidos().getLista().size()>0) {
+            for (Cliente cliente : datos.getListaClientes().getLista()) {
+                if (cliente.getEmail().equals(email)) {
+                    encontrado = true;
+                    clienteEncontrado = cliente;
+                }
+            }
+            if (encontrado) {
+                for (Pedido pedido : datos.getListaPedidos().getLista()) {
+                    //Busqueda de tiempo de preparacion del articulo
+                    if (pedido.getCliente().equals(clienteEncontrado)) {
+                            if (!pedido.pedidoEnviado()) {
+                                pedido.setEnviado(false);
+                                System.out.println(pedido.toString());
+                            }
+                    }
+                }
+            } else {
+                System.out.println("El cliente no fue encontrado.");
+            }
+        } else {
+            System.out.println("No hay pedidos para mostrar.");
+        }
+    }
+
+    public void filtrarPedidosPendientes (){
+        if(datos.getListaPedidos().getLista().size()>0){
+            for (Pedido pedido : datos.getListaPedidos().getLista()) {
+                //Busqueda de tiempo de preparacion del articulo
+
+                    if (!pedido.pedidoEnviado()){
+                        pedido.setEnviado(false);
+                        System.out.println(pedido.toString());
+                    }
+
+            }
+        } else {
+            System.out.println("No hay pedidos para mostrar.");
+        }
+
+    }
+
+    public void filtrarPedidosEnviadosPorNombreCliente(String email) {
+        boolean encontrado = false;
+        Cliente clienteEncontrado = null;
+        if(datos.getListaPedidos().getLista().size()>0) {
+            for (Cliente cliente : datos.getListaClientes().getLista()) {
+                if (cliente.getEmail().equals(email)) {
+                    encontrado = true;
+                    clienteEncontrado = cliente;
+                }
+            }
+            if (encontrado) {
+                for (Pedido pedido : datos.getListaPedidos().getLista()) {
+                    //Busqueda de tiempo de preparacion del articulo
+                    if (pedido.getCliente().equals(clienteEncontrado)) {
+                            if (pedido.pedidoEnviado()) {
+                                pedido.setEnviado(true);
+                                System.out.println(pedido.toString());
+                            }
+                    }
+                }
+            } else {
+                System.out.println("El cliente no fue encontrado.");
+            }
+        } else {
+            System.out.println("No hay pedidos para mostrar.");
+        }
+    }
+
+    public void filtrarPedidosEnviados (){
+        if(datos.getListaPedidos().getLista().size()>0){
+            for (Pedido pedido : datos.getListaPedidos().getLista()) {
+                //Busqueda de tiempo de preparacion del articulo
+                    if (pedido.pedidoEnviado()){
+                        pedido.setEnviado(true);
+                        System.out.println(pedido.toString());
+                    }
+            }
+        } else {
+            System.out.println("No hay pedidos para mostrar.");
+        }
+
     }
 }

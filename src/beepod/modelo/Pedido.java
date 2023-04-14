@@ -1,6 +1,7 @@
 package beepod.modelo;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class Pedido {
     //Atributos
@@ -93,6 +94,21 @@ public class Pedido {
     public void setEnviado(boolean enviado) {
         this.enviado = enviado;
     }
+
+    public boolean pedidoEnviado(){
+        //Calculo de minutos pasados entre la creación del pedido y la fecha actual para saber
+        LocalDateTime fechaActual = LocalDateTime.now();
+        LocalDateTime fechaPedido = getFecha();
+        long diferenciaMinutos = ChronoUnit.MINUTES.between(fechaPedido, fechaActual);
+
+
+        //Tiempo de preparación del articulo seleccionado
+        long tiempoPreparacion = articulo.getTiempoPreparacion();
+
+        //Comprueba si envio no ha sido enviado
+        return diferenciaMinutos >= tiempoPreparacion;
+    }
+
     public float totalPedido(int cantidad, Articulo articulo, Cliente cliente){//ver el caso práctico para saber si el descuento se aplica solo en los gastos de envío.
         float total;
         total = (cantidad * articulo.getPrecioVenta()) + (articulo.getGastosEnvio()*(1-cliente.descuentoEnv()));
