@@ -311,6 +311,5 @@ public class Controlador {
         } else {
             System.out.println("No hay pedidos para mostrar.");
         }
-
     }
 }
