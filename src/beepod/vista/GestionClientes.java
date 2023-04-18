@@ -2,6 +2,7 @@ package beepod.vista;
 
 import beepod.controlador.Controlador;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -11,7 +12,7 @@ public class GestionClientes {
     Scanner teclado = new Scanner(System.in);
     public GestionClientes(){ }
 
-    public void inicio(Controlador control){
+    public void inicio(Controlador control) throws IOException {
         boolean salir = false;
         char opcio;
 

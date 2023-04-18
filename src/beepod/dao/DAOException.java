@@ -1,5 +1,8 @@
 package beepod.dao;
 
+/**
+ * Clase para controlar las excepciones
+ */
 public class DAOException extends  Exception{
 
     public DAOException(String message) {
