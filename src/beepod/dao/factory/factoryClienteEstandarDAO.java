@@ -43,7 +43,7 @@ public class factoryClienteEstandarDAO implements ClienteNormalDao {
     public void insertar(ClienteNormal a) throws DAOException {
         PreparedStatement stat = null;
         try{
-
+            con.setAutoCommit(false);
             stat = con.prepareStatement(INSERT);
             stat.setString(1, a.getEmail());
             stat.setString(2, a.getNombre());
@@ -54,7 +54,15 @@ public class factoryClienteEstandarDAO implements ClienteNormalDao {
             if (stat.executeUpdate() == 0){
                 throw  new DAOException("Error en grabado SQL");
             };
+            con.commit();//confirmamos
         }catch (SQLException exception){
+            try {
+                if (con != null) {
+                    con.rollback();//si falla volvemos atras
+                }
+            } catch (SQLException ex2) {
+                System.out.println("Error al deshacer la transacción: " + ex2.getMessage());
+            }
             throw  new DAOException("Error en SQL"+exception);
         }
         finally {

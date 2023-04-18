@@ -31,17 +31,27 @@ public class factoryPedido {
         PreparedStatement stat = null;
         CallableStatement cs = null;//para los procedimientos almacenados
         try{
+            con.setAutoCommit(false);
             stat = con.prepareStatement(INSERT);
             stat.setString(1, a.getArticulo().getCodigo());
             stat.setInt(2, a.getCantidad());
             stat.setString(3,a.getCliente().getEmail());
+
             if (stat.executeUpdate() == 0){
                 throw  new DAOException("Error en grabado SQL");
             };
+            con.commit();//confirmamos
             cs = con.prepareCall("{CALL totalPedido()}");//llamamos al procedimiento almacenado para poner los datos totales del pedido hora y total
             cs.execute();//ejecutamos el procedimiento almacenado
             cs.close();//cerramos la llamada
         }catch (SQLException exception){
+            try {
+                if (con != null) {
+                    con.rollback();//volvemos si hay error
+                }
+            } catch (SQLException ex2) {
+                System.out.println("Error al deshacer la transacción: " + ex2.getMessage());
+            }
             throw  new DAOException("Error en SQL"+exception);
         }
         finally {

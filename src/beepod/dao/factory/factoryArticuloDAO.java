@@ -39,7 +39,7 @@ public class factoryArticuloDAO implements ArticuloDao {
         PreparedStatement stat = null;
         //CallableStatement cs = null;//para los procedimientos almacenados
         try{
-
+            con.setAutoCommit(false);
             stat = con.prepareStatement(INSERT);
             stat.setString(1, a.getCodigo());
             stat.setString(2, a.getDescripcion());
@@ -49,11 +49,20 @@ public class factoryArticuloDAO implements ArticuloDao {
             if (stat.executeUpdate() == 0){
                 throw  new DAOException("Error en grabado SQL");
             };
+            con.commit();///confirmamos
             /*cs = con.prepareCall("{CALL totalPedido()}");//llamamos al procedimiento almacenado
             cs.execute();//ejecutamos el procedimiento almacenado
             cs.close();//cerramos la llamada*/
         }catch (SQLException exception){
+            try {
+                if (con != null) {
+                    con.rollback();
+                }
+            } catch (SQLException ex2) {
+                System.out.println("Error al deshacer la transacción: " + ex2.getMessage());
+            }
             throw  new DAOException("Error en SQL"+exception);
+
         }
         finally {
             if (stat != null){

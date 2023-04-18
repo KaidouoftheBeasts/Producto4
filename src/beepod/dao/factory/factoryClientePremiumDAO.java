@@ -40,20 +40,29 @@ public class factoryClientePremiumDAO implements ClientePremiumDao {
         PreparedStatement stat = null;
         CallableStatement cs = null;//para los procedimientos almacenados
         try{
-
+            con.setAutoCommit(false);
             stat = con.prepareStatement(INSERT);
             stat.setString(1, a.getEmail());
             stat.setString(2, a.getNombre());
             stat.setString(3,a.getDomicilio());
             stat.setString(4, a.getNif());
             stat.setString(5, "Premium");
+
             if (stat.executeUpdate() == 0){
                 throw  new DAOException("Error en grabado SQL");
             };
+            con.commit();//confirmamos
             cs = con.prepareCall("{CALL insertarDatosPremium()}");//llamamos al procedimiento almacenado
             cs.execute();//ejecutamos el procedimiento almacenado
             cs.close();//cerramos la llamada
         }catch (SQLException exception){
+            try {
+                if (con != null) {
+                    con.rollback();//si falla volvemos atrás
+                }
+            } catch (SQLException ex2) {
+                System.out.println("Error al deshacer la transacción: " + ex2.getMessage());
+            }
             throw  new DAOException("Error en SQL"+exception);
         }
         finally {
