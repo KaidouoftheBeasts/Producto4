@@ -7,10 +7,7 @@ import beepod.modelo.Cliente;
 import beepod.modelo.ClienteNormal;
 import beepod.modelo.ClientePremium;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +19,7 @@ public class factoryClienteEstandarDAO implements ClienteNormalDao {
     final String INSERT = "INSERT INTO clientes(email, nombre, domicilio, nif, tipoCliente) VALUES (?,?,?,?,?)";
 //    final String UPDATE = "UPDATE clientes SET email = ?, nombre = ?, domicilio = ?, nif = ?, tipoCliente = ? WHERE email = ? ";
 //    final String DELETE = "DELETE FROM clientes WHERE email = ?";
-    final String GETALL = "SELECT email, nombre, domicilio, nif, tipoCliente, descuento, cuota FROM clientes";
+    final String GETALL = "SELECT email, nombre, domicilio, nif, tipoCliente, descuento, cuota FROM clientes WHERE tipoCliente = 'Estandard'";
     final String GETONE = "SELECT email, nombre, domicilio, nif, tipoCliente, descuento, cuota FROM clientes  WHERE email = ?";
     private Connection con;
 
@@ -255,4 +252,21 @@ public class factoryClienteEstandarDAO implements ClienteNormalDao {
             }
         }
     }
+    public static void main (String [] args) throws SQLException{//para probar métodos
+        Connection con = null;
+
+        try{
+            con = DriverManager.getConnection("jdbc:mysql://localhost/beepod", "root","Windows1234");
+            ClienteNormalDao dao = new factoryClienteEstandarDAO(con);
+            List<ClienteNormal> clienteNormals = dao.obtenerTodos();
+            for (ClienteNormal a : clienteNormals){
+                System.out.println(clienteNormals);
+            }
+            con.close();
+        }catch(Exception ex){
+            System.out.println("Error en SQL2"+ex);
+        }
+    }
+
+
 }
