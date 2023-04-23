@@ -2,6 +2,7 @@ package beepod.vista;
 
 import beepod.controlador.Controlador;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -13,7 +14,7 @@ public class GestionArticulos {
 
     }
 
-    public void inicio(Controlador control){
+    public void inicio(Controlador control) throws IOException {
         boolean salir = false;
         char opcio;
 

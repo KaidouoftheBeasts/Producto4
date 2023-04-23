@@ -1,6 +1,9 @@
 package beepod.vista;
 
 import beepod.controlador.Controlador;
+import beepod.dao.DAOException;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -11,7 +14,7 @@ public class GestionOs {
     Scanner teclado = new Scanner(System.in);
 
 
-    public void inicio(){
+    public void inicio() throws IOException, DAOException {
         boolean salir = false;
         char opcio;
 

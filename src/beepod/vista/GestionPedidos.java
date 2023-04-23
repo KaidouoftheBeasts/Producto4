@@ -1,7 +1,9 @@
 package beepod.vista;
 
 import beepod.controlador.Controlador;
+import beepod.dao.DAOException;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -15,7 +17,7 @@ public class GestionPedidos {
 
     }
 
-    public void inicio(Controlador control) {
+    public void inicio(Controlador control) throws IOException, DAOException {
         boolean salir = false;
         char opcio;
 
@@ -59,7 +61,7 @@ public class GestionPedidos {
         return resp.charAt(0);
     }
 
-    public void datosPedido(Controlador control) {
+    public void datosPedido(Controlador control) throws IOException, DAOException {
         // Pedir el correo electrónico del cliente
 
         System.out.println("Introduce el correo electrónico del cliente: ");

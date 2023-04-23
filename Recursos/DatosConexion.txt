@@ -1,0 +1,3 @@
+url=jdbc:mysql://localhost:8888/beepod
+user=root
+password=747337
