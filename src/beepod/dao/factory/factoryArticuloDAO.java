@@ -37,7 +37,6 @@ public class factoryArticuloDAO implements ArticuloDao {
     @Override
     public void insertar(Articulo a) throws DAOException{
         PreparedStatement stat = null;
-        //CallableStatement cs = null;//para los procedimientos almacenados
         try{
             con.setAutoCommit(false);
             stat = con.prepareStatement(INSERT);
@@ -50,9 +49,6 @@ public class factoryArticuloDAO implements ArticuloDao {
                 throw  new DAOException("Error en grabado SQL");
             };
             con.commit();///confirmamos
-            /*cs = con.prepareCall("{CALL totalPedido()}");//llamamos al procedimiento almacenado
-            cs.execute();//ejecutamos el procedimiento almacenado
-            cs.close();//cerramos la llamada*/
         }catch (SQLException exception){
             try {
                 if (con != null) {

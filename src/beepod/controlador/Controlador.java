@@ -376,7 +376,8 @@ public class Controlador {
                 dao.insertar(clienteNormal);
                 System.out.println("Cliente Estandar añadido.\n" + clienteNormal);
                 con.desconectarBD();
-            } else {
+            }
+            if (opcion == 2 ) {
                 ClientePremium clientePremium = new ClientePremium(nombre, domicilio, nif, email);
                 ClientePremiumDao dao = new factoryClientePremiumDAO(con.getConnection());
                 dao.insertar(clientePremium);

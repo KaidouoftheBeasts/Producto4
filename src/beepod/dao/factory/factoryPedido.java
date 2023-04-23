@@ -40,10 +40,10 @@ public class factoryPedido {
             if (stat.executeUpdate() == 0){
                 throw  new DAOException("Error en grabado SQL");
             };
-            con.commit();//confirmamos
             cs = con.prepareCall("{CALL totalPedido()}");//llamamos al procedimiento almacenado para poner los datos totales del pedido hora y total
             cs.execute();//ejecutamos el procedimiento almacenado
             cs.close();//cerramos la llamada
+            con.commit();//confirmamos
         }catch (SQLException exception){
             try {
                 if (con != null) {

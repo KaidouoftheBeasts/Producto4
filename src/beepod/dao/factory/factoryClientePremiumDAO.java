@@ -18,7 +18,7 @@ public class factoryClientePremiumDAO implements ClientePremiumDao {
     final String INSERT = "INSERT INTO clientes(email, nombre, domicilio, nif, tipoCliente) VALUES (?,?,?,?,?)";
     final String UPDATE = "UPDATE clientes SET email = ?, nombre = ?, domicilio = ?, nif = ?, tipoCliente = ? WHERE email = ? ";
     final String DELETE = "DELETE FROM clientes WHERE email = ?";
-    final String GETALL = "SELECT email, nombre, domicilio, nif, tipoCliente, descuento, cuota FROM clientes";
+    final String GETALL = "SELECT email, nombre, domicilio, nif, tipoCliente, descuento, cuota FROM clientes WHERE tipoCliente = 'Premium'";
     final String GETONE = "SELECT email, nombre, domicilio, nif, tipoCliente, descuento, cuota FROM clientes  WHERE email = ?";
     private Connection con;
 
@@ -51,10 +51,10 @@ public class factoryClientePremiumDAO implements ClientePremiumDao {
             if (stat.executeUpdate() == 0){
                 throw  new DAOException("Error en grabado SQL");
             };
-            con.commit();//confirmamos
             cs = con.prepareCall("{CALL insertarDatosPremium()}");//llamamos al procedimiento almacenado
             cs.execute();//ejecutamos el procedimiento almacenado
             cs.close();//cerramos la llamada
+            con.commit();//confirmamos
         }catch (SQLException exception){
             try {
                 if (con != null) {
